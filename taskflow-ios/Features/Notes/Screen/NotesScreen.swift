@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  NotesScreen.swift
 //  taskflow-ios
 //
 //  Created by Howard Thomas on 5/5/25.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct NotesScreen: View {
     var body: some View {
-        TabUIView()
+        Text("Notes Screen")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct NotesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NotesScreen()
     }
 }

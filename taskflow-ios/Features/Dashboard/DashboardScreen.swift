@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DashboardScreen.swift
 //  taskflow-ios
 //
 //  Created by Howard Thomas on 5/5/25.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DashboardScreen: View {
     var body: some View {
-        TabUIView()
+        Text("Dashboard")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct DashboardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        DashboardScreen()
     }
 }
