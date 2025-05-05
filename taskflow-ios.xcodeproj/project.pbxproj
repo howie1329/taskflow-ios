@@ -51,6 +51,10 @@
 		F3E4632A2DC87FCB000D5AC8 /* taskflow-ios */ = {
 			isa = PBXGroup;
 			children = (
+				F3E4633C2DC88129000D5AC8 /* DataModels */,
+				F3E4633B2DC88122000D5AC8 /* Models */,
+				F3E4633A2DC8811B000D5AC8 /* Services */,
+				F3E463392DC88115000D5AC8 /* UI */,
 				F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */,
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
 				F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */,
@@ -65,6 +69,34 @@
 				F3E463322DC87FCD000D5AC8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3E463392DC88115000D5AC8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		F3E4633A2DC8811B000D5AC8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F3E4633B2DC88122000D5AC8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3E4633C2DC88129000D5AC8 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
