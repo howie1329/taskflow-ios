@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isLoggin = false
+    
     var body: some View {
-        TabUIView()
+        if isLoggin {
+            TabUIView()
+        } else {
+            AuthUIScreen(isLoggin: $isLoggin)
+        }
     }
 }
 

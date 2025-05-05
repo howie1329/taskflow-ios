@@ -11,7 +11,7 @@ import SwiftUI
 struct taskflow_iosApp: App {
     var body: some Scene {
         WindowGroup {
-            TabUIView()
+         ContentView()
         }
     }
 }

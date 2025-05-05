@@ -17,6 +17,7 @@
 		F3E4634F2DC916D2000D5AC8 /* NotesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4634E2DC916D2000D5AC8 /* NotesScreen.swift */; };
 		F3E463522DC916EF000D5AC8 /* ProjectsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463512DC916EF000D5AC8 /* ProjectsScreen.swift */; };
 		F3E463552DC91708000D5AC8 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463542DC91708000D5AC8 /* EventsScreen.swift */; };
+		F3E463582DC91A6A000D5AC8 /* AuthUIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		F3E4634E2DC916D2000D5AC8 /* NotesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesScreen.swift; sourceTree = "<group>"; };
 		F3E463512DC916EF000D5AC8 /* ProjectsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsScreen.swift; sourceTree = "<group>"; };
 		F3E463542DC91708000D5AC8 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
+		F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				F3E4633D2DC88322000D5AC8 /* Features */,
-				F3E4633C2DC88129000D5AC8 /* DataModels */,
 				F3E4633B2DC88122000D5AC8 /* Models */,
 				F3E4633A2DC8811B000D5AC8 /* Services */,
-				F3E463392DC88115000D5AC8 /* UI */,
 				F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */,
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
 				F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */,
@@ -84,13 +84,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		F3E463392DC88115000D5AC8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		F3E4633A2DC8811B000D5AC8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +96,6 @@
 			children = (
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		F3E4633C2DC88129000D5AC8 /* DataModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModels;
 			sourceTree = "<group>";
 		};
 		F3E4633D2DC88322000D5AC8 /* Features */ = {
@@ -161,6 +147,7 @@
 		F3E463422DC8834B000D5AC8 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				F3E463562DC918EB000D5AC8 /* Screens */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -219,6 +206,14 @@
 				F3E463542DC91708000D5AC8 /* EventsScreen.swift */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		F3E463562DC918EB000D5AC8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3E463582DC91A6A000D5AC8 /* AuthUIScreen.swift in Sources */,
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
 				F3E4634F2DC916D2000D5AC8 /* NotesScreen.swift in Sources */,
 				F3E463552DC91708000D5AC8 /* EventsScreen.swift in Sources */,
