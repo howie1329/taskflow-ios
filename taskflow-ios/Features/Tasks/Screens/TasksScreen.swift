@@ -14,6 +14,7 @@ struct TasksScreen: View {
     @State private var selectedPriority: Tasks.Priority = .low
     @State private var actionSheetIsActive: Bool = false
     @State private var createTaskSheet: Bool = false
+    @State private var selectedTask: Tasks?
 
     var filteredTask: [Tasks] {
         dummyTaskArray.filter { task in
@@ -74,9 +75,12 @@ struct TasksScreen: View {
                             
                         } else{
                             ForEach(filteredTask){item in
-                               NavigationLink(destination: TaskDetailsScreen(singleTask: item), label: {
+                                Button {
+                                    selectedTask = item
+                                } label: {
                                     SingleTaskListItem(task: item)
-                                })
+                                }
+
                                
                             }
                         }}
@@ -97,6 +101,10 @@ struct TasksScreen: View {
             }
             .sheet(isPresented: $createTaskSheet) {
                 CreateTaskScreen()
+           }
+            .sheet(item: $selectedTask) { task in
+                TaskDetailsScreen(singleTask: task)
+                    .presentationDetents([.medium])
             }
         
     }
