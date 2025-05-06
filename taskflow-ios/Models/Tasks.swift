@@ -25,6 +25,7 @@ struct Tasks: Identifiable {
 }
 
 enum TaskStatus: String, CaseIterable{
+    case all = "All"
     case notStarted = "Not Started"
     case inProgress = "In Progress"
     case completed = "Completed"

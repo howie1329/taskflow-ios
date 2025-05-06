@@ -10,14 +10,25 @@ import SwiftUI
 struct TasksScreen: View {
     @State private var selectedTask: Tasks?
     @State private var filterSheetIsPresented: Bool = false
-    @State private var selectedFilter: TaskStatus = .completed
+    @State private var selectedFilter: TaskStatus = .all
     @State private var activeFilter: Bool = false
     @State private var selectedPriority: Tasks.Priority = .low
     var filteredTask: [Tasks] {
-        dummyTaskArray.filter{ !activeFilter || ($0.status == selectedFilter && $0.priority == selectedPriority) }
+        dummyTaskArray.filter { task in
+            let statusMatches = selectedFilter == .all || task.status == selectedFilter
+            let priorityMatches = !activeFilter || task.priority == selectedPriority
+            return statusMatches && priorityMatches
+        }
     }
     var body: some View {
         NavigationStack{
+            Picker("Status", selection: $selectedFilter) {
+                ForEach(TaskStatus.allCases, id: \.self) { status in
+                    Text(status.rawValue).tag(status)
+                }
+            }
+            .pickerStyle(.automatic)
+            .padding(.horizontal)
             ScrollView{
                 LazyVStack{
                     if filteredTask.isEmpty{
@@ -54,19 +65,6 @@ struct TasksScreen: View {
                 Text("Filter For Tasks")
                     .font(.headline)
                     .padding(.top)
-                
-                // Task Status Picker
-                VStack(alignment: .leading) {
-                    Text("Status")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                    Picker("Status", selection: $selectedFilter) {
-                        ForEach(TaskStatus.allCases, id: \.self) { status in
-                            Text(status.rawValue).tag(status)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
                 
                 // Priority Picker
                 VStack(alignment: .leading) {

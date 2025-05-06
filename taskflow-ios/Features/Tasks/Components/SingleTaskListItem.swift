@@ -85,12 +85,12 @@ struct SingleTaskListItem: View {
                 }
             }
         }
-        .padding(16)
+        .padding(8)
         .background(Color.white)
-        .cornerRadius(14)
-        .shadow(color: Color.black.opacity(0.06), radius: 6, x: 0, y: 2)
+        .cornerRadius(18)
+        .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
         .overlay(
-            RoundedRectangle(cornerRadius: 14)
+            RoundedRectangle(cornerRadius: 18)
                 .stroke(Color(.systemGray6), lineWidth: 1)
         )
         .padding(.vertical, 4)
