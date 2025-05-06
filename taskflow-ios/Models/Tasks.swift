@@ -7,18 +7,26 @@
 
 import Foundation
 
-struct Task: Identifiable {
+struct Tasks: Identifiable {
     let id: UUID
     var title: String
     var description: String
     var dueDate: Date
     var priority: Priority
     var isCompleted: Bool
-    var category: String
+    var category: [String]
+    var status: TaskStatus = .notStarted
     
     enum Priority: String {
         case low
         case medium
         case high
     }
+}
+
+enum TaskStatus: String {
+    case notStarted = "Not Started"
+    case inProgress = "In Progress"
+    case completed = "Completed"
+    case overDue = "Over Due"
 }

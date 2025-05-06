@@ -14,14 +14,18 @@ struct taskflow_iosApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack{
-                ContentView()
-            }
-            .environment(clerk)
-            .task {
-                clerk.configure(publishableKey: "pk_test_aW52aXRpbmctbWlubm93LTk2LmNsZXJrLmFjY291bnRzLmRldiQ")
-                try? await clerk.load()
+            ZStack {
+                   if clerk.isLoaded {
+                     ContentView()
+                   } else {
+                     ContentView()
+                   }
+                 }
+                 .environment(clerk)
+                 .task {
+                   clerk.configure(publishableKey: "pk_test_aW52aXRpbmctbWlubm93LTk2LmNsZXJrLmFjY291bnRzLmRldiQ")
+                   try? await clerk.load()
+                 }
             }
         }
     }
-}

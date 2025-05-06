@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct TasksScreen: View {
+    @State private var selectedTask: Tasks?
     var body: some View {
-        Text("Task Screen")
+        NavigationStack{
+            VStack{
+                List(dummyTaskArray){item in
+                    SingleTaskListItem(task: item)
+                }
+            }
+            .navigationTitle("Tasks")
+        }
     }
 }
 
-struct TasksScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TasksScreen()
-    }
+#Preview {
+    TasksScreen()
 }

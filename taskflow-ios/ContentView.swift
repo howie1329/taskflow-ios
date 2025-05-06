@@ -17,14 +17,8 @@ struct ContentView: View {
             if let user = clerk.user {
                 TabUIView()
             } else {
-                AuthUIScreen()
+                TabUIView()
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

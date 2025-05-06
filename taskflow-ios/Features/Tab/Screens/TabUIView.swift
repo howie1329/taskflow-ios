@@ -8,35 +8,37 @@
 import SwiftUI
 
 struct TabUIView: View {
+    @State private var selectedTab: Int = 2
+
     var body: some View {
-        TabView{
-            DashboardScreen()
-                .badge(0)
-                .tabItem {
-                    Label("Dashboard", systemImage: "person.crop.circle.fill")
-                }
+        TabView(selection: $selectedTab) {
             TasksScreen()
-                .badge(0)
                 .tabItem {
-                    Label("Tasks", systemImage: "person.crop.circle.fill")
+                    Label("Tasks", systemImage: "checkmark.circle.fill")
                 }
+                .tag(0)
             NotesScreen()
-                .badge(0)
                 .tabItem {
-                    Label("Notes", systemImage: "person.crop.circle.fill")
+                    Label("Notes", systemImage: "note.text")
                 }
+                .tag(1)
+            DashboardScreen()
+                .tabItem {
+                    Label("Dashboard", systemImage: "house.fill")
+                }
+                .tag(2)
             ProjectsScreen()
-                .badge(0)
                 .tabItem {
-                    Label("Projects", systemImage: "person.crop.circle.fill")
+                    Label("Projects", systemImage: "folder.fill")
                 }
+                .tag(3)
             EventsScreen()
-                .badge(0)
                 .tabItem {
-                    Label("Events", systemImage: "person.crop.circle.fill")
+                    Label("Events", systemImage: "calendar")
                 }
-            
+                .tag(4)
         }
+        .accentColor(.purple) // Optional: customize selected tab color
     }
 }
 
