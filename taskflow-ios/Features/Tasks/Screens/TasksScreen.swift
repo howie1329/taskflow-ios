@@ -13,6 +13,7 @@ struct TasksScreen: View {
     @State private var selectedFilter: TaskStatus = .all
     @State private var activeFilter: Bool = false
     @State private var selectedPriority: Tasks.Priority = .low
+
     var filteredTask: [Tasks] {
         dummyTaskArray.filter { task in
             let statusMatches = selectedFilter == .all || task.status == selectedFilter
@@ -45,7 +46,10 @@ struct TasksScreen: View {
                         
                     } else{
                         ForEach(filteredTask){item in
-                            SingleTaskListItem(task: item)
+                           NavigationLink(destination: IndividualTaskScreen(singleTask: item)){
+                                SingleTaskListItem(task: item)
+                            }
+                           
                         }
                     }}
                 .padding(.horizontal)
@@ -61,43 +65,7 @@ struct TasksScreen: View {
             }
         }
         .sheet(isPresented: $filterSheetIsPresented) {
-            VStack(spacing: 24) {
-                Text("Filter For Tasks")
-                    .font(.headline)
-                    .padding(.top)
-                
-                // Priority Picker
-                VStack(alignment: .leading) {
-                    Text("Priority")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                    Picker("Priority", selection: $selectedPriority) {
-                        ForEach(Tasks.Priority.allCases, id: \.self) { priority in
-                            Text(priority.rawValue.capitalized).tag(priority)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                
-                HStack {
-                    Button("Apply Filter") {
-                        activeFilter = true
-                        filterSheetIsPresented.toggle()
-                    }
-                    .buttonStyle(.borderedProminent)
-                    
-                    Button("Reset") {
-                        activeFilter = false
-                        filterSheetIsPresented.toggle()
-                        // Optionally reset pickers to default values:
-                        // selectedFilter = .completed
-                        // selectedPriority = .low
-                    }
-                    .buttonStyle(.bordered)
-                }
-                .padding(.top)
-            }
-            .padding()
+            TaskFilterSheet(selectedPriority: $selectedPriority, activeFilter: $activeFilter, filterSheetIsPresented: $filterSheetIsPresented)
             .presentationDetents([.medium])
         }
     }

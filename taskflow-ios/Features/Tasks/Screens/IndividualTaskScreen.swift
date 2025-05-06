@@ -79,7 +79,6 @@ struct IndividualTaskScreen: View {
             }
             .padding()
         }
-        .navigationTitle("Task Details")
         .background(Color(.systemBackground).ignoresSafeArea())
     }
 
