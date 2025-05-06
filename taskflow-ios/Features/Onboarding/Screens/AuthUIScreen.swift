@@ -8,15 +8,35 @@
 import SwiftUI
 
 struct AuthUIScreen: View {
-    @Binding var isLoggin:Bool
-    var body: some View {
-        Text("Auth UI Screen")
-        Button {
-            isLoggin.toggle()
-        } label: {
-            Text("Press Me")
-        }
-        .buttonBorderShape(.roundedRectangle)
+    enum AuthTab: String, CaseIterable, Identifiable {
+        case signIn = "Sign In"
+        case signUp = "Sign Up"
+        var id: String { self.rawValue }
+    }
 
+    @State private var selectedTab: AuthTab = .signIn
+
+    var body: some View {
+        VStack(spacing: 32) {
+            // App Title or Logo
+            Text("TaskFlow")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.top, 40)
+
+            Picker("Authentication", selection: $selectedTab) {
+                ForEach(AuthTab.allCases) { tab in
+                    Text(tab.rawValue).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+
+            if selectedTab == .signIn {
+                SignInScreen()
+            } else {
+                SignUpScreen()
+            }
+        }
     }
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */ = {isa = PBXBuildFile; productRef = F393DA4B2DC9B55C00BB1CE2 /* Clerk */; };
+		F393DA502DC9BD1B00BB1CE2 /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */; };
+		F393DA522DC9BD2E00BB1CE2 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */; };
 		F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */; };
 		F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */; };
 		F3E463302DC87FCD000D5AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */; };
@@ -21,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taskflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskflow_iosApp.swift; sourceTree = "<group>"; };
 		F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */,
+				F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */,
+				F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -232,6 +240,9 @@
 			dependencies = (
 			);
 			name = "taskflow-ios";
+			packageProductDependencies = (
+				F393DA4B2DC9B55C00BB1CE2 /* Clerk */,
+			);
 			productName = "taskflow-ios";
 			productReference = F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -244,7 +255,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					F3E463272DC87FCB000D5AC8 = {
 						CreatedOnToolsVersion = 14.3;
@@ -260,6 +271,9 @@
 				Base,
 			);
 			mainGroup = F3E4631F2DC87FCB000D5AC8;
+			packageReferences = (
+				F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */,
+			);
 			productRefGroup = F3E463292DC87FCB000D5AC8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -287,6 +301,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3E463582DC91A6A000D5AC8 /* AuthUIScreen.swift in Sources */,
+				F393DA502DC9BD1B00BB1CE2 /* SignInScreen.swift in Sources */,
+				F393DA522DC9BD2E00BB1CE2 /* SignUpScreen.swift in Sources */,
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
 				F3E4634F2DC916D2000D5AC8 /* NotesScreen.swift in Sources */,
 				F3E463552DC91708000D5AC8 /* EventsScreen.swift in Sources */,
@@ -335,8 +351,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -351,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -395,8 +413,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -405,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -423,7 +443,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"taskflow-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -431,6 +450,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,7 +472,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"taskflow-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -460,6 +479,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -495,6 +515,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/clerk/clerk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.56.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F393DA4B2DC9B55C00BB1CE2 /* Clerk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */;
+			productName = Clerk;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3E463202DC87FCB000D5AC8 /* Project object */;
 }
