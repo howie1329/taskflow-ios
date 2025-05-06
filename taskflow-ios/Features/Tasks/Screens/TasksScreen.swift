@@ -12,6 +12,8 @@ struct TasksScreen: View {
     @State private var selectedFilter: TaskStatus = .all
     @State private var activeFilter: Bool = false
     @State private var selectedPriority: Tasks.Priority = .low
+    @State private var actionSheetIsActive: Bool = false
+    @State private var createTaskSheet: Bool = false
 
     var filteredTask: [Tasks] {
         dummyTaskArray.filter { task in
@@ -21,52 +23,82 @@ struct TasksScreen: View {
         }
     }
     var body: some View {
-        NavigationStack{
-            Picker("Status", selection: $selectedFilter) {
-                ForEach(TaskStatus.allCases, id: \.self) { status in
-                    Text(status.rawValue).tag(status)
+            NavigationStack{
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(spacing: 8){
+                        ForEach(TaskStatus.allCases, id: \.self){status in
+                            Button{
+                                selectedFilter = status
+                            } label: {
+                                Text(status.rawValue)
+                                    .font(.subheadline)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 4)
+                                    .background(selectedFilter == status ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+                                    .foregroundStyle(selectedFilter == status ? .blue : .primary)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    
+                            }
+                        }
+                    }
                 }
-            }
-            .pickerStyle(.automatic)
-            .padding(.horizontal)
-            ScrollView{
-                LazyVStack{
-                    if filteredTask.isEmpty{
-                        VStack(spacing: 4){
-                            Image("TaskListEmptyState")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                                .opacity(0.5)
-                            Text("No Tasks Found")
-                                .foregroundStyle(.gray)
-                                .font(.headline)
-                        }
-                        
-                    } else{
-                        ForEach(filteredTask){item in
-                           NavigationLink(destination: TaskDetailsScreen(singleTask: item), label: {
-                                SingleTaskListItem(task: item)
-                            })
-                           
-                        }
-                    }}
                 .padding(.horizontal)
-            }
-            .navigationTitle("Tasks")
-            .toolbar{
                 Button{
-                    sheetIsActive.toggle()
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .foregroundStyle(.black)
+                    createTaskSheet.toggle()
+                }label: {
+                    HStack{
+                        Image(systemName: "plus")
+                        Text("New Task")
+                            
+                    }
+                    .font(.headline)
+                    .frame(maxWidth:.infinity)
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 1))
+                }
+                .padding(.horizontal)
+                
+                ScrollView(.vertical, showsIndicators: false){
+                    LazyVStack{
+                        if filteredTask.isEmpty{
+                            VStack(spacing: 4){
+                                Image("TaskListEmptyState")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 150)
+                                    .opacity(0.5)
+                                Text("No Tasks Found")
+                                    .foregroundStyle(.gray)
+                                    .font(.headline)
+                            }
+                            
+                        } else{
+                            ForEach(filteredTask){item in
+                               NavigationLink(destination: TaskDetailsScreen(singleTask: item), label: {
+                                    SingleTaskListItem(task: item)
+                                })
+                               
+                            }
+                        }}
+                    .padding(.horizontal)
+                }
+                .toolbar{
+                        Button{
+                            sheetIsActive.toggle()
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .foregroundStyle(.black)
+                        }
                 }
             }
-        }
-        .sheet(isPresented: $sheetIsActive) {
-            TaskFilterSheet(selectedPriority: $selectedPriority, activeFilter: $activeFilter, filterSheetIsPresented: $sheetIsActive)
-                .presentationDetents([.medium])
-        }
+            .sheet(isPresented: $sheetIsActive) {
+                TaskFilterSheet(selectedPriority: $selectedPriority, activeFilter: $activeFilter, filterSheetIsPresented: $sheetIsActive)
+                    .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $createTaskSheet) {
+                CreateTaskScreen()
+            }
+        
     }
 }
 
