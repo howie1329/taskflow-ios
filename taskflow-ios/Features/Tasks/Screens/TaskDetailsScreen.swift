@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IndividualTaskScreen: View {
+struct TaskDetailsScreen: View {
     var singleTask: Tasks
 
     var body: some View {
@@ -93,5 +93,5 @@ struct IndividualTaskScreen: View {
 }
 
 #Preview {
-    IndividualTaskScreen(singleTask: Tasks(id: UUID(), title: "HomeWork", description: "Simple Homework Needs To Be Done", dueDate: Date.now, priority: .high, isCompleted: false, category: ["School","Grades"]))
+    TaskDetailsScreen(singleTask: Tasks(id: UUID(), title: "HomeWork", description: "Simple Homework Needs To Be Done", dueDate: Date.now, priority: .high, isCompleted: false, category: ["School","Grades"]))
 }

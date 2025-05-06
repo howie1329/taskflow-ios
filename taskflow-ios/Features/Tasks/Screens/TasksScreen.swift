@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct TasksScreen: View {
-    @State private var selectedTask: Tasks?
-    @State private var filterSheetIsPresented: Bool = false
+    @State private var sheetIsActive: Bool = false
     @State private var selectedFilter: TaskStatus = .all
     @State private var activeFilter: Bool = false
     @State private var selectedPriority: Tasks.Priority = .low
@@ -46,9 +45,9 @@ struct TasksScreen: View {
                         
                     } else{
                         ForEach(filteredTask){item in
-                           NavigationLink(destination: IndividualTaskScreen(singleTask: item)){
+                           NavigationLink(destination: TaskDetailsScreen(singleTask: item), label: {
                                 SingleTaskListItem(task: item)
-                            }
+                            })
                            
                         }
                     }}
@@ -57,16 +56,16 @@ struct TasksScreen: View {
             .navigationTitle("Tasks")
             .toolbar{
                 Button{
-                    filterSheetIsPresented.toggle()
+                    sheetIsActive.toggle()
                 } label: {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "line.3.horizontal.decrease.circle")
                         .foregroundStyle(.black)
                 }
             }
         }
-        .sheet(isPresented: $filterSheetIsPresented) {
-            TaskFilterSheet(selectedPriority: $selectedPriority, activeFilter: $activeFilter, filterSheetIsPresented: $filterSheetIsPresented)
-            .presentationDetents([.medium])
+        .sheet(isPresented: $sheetIsActive) {
+            TaskFilterSheet(selectedPriority: $selectedPriority, activeFilter: $activeFilter, filterSheetIsPresented: $sheetIsActive)
+                .presentationDetents([.medium])
         }
     }
 }
