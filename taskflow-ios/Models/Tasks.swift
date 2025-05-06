@@ -17,14 +17,14 @@ struct Tasks: Identifiable {
     var category: [String]
     var status: TaskStatus = .notStarted
     
-    enum Priority: String {
+    enum Priority: String, CaseIterable{
         case low
         case medium
         case high
     }
 }
 
-enum TaskStatus: String {
+enum TaskStatus: String, CaseIterable{
     case notStarted = "Not Started"
     case inProgress = "In Progress"
     case completed = "Completed"
