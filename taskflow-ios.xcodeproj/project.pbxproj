@@ -7,18 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */ = {isa = PBXBuildFile; productRef = F393DA4B2DC9B55C00BB1CE2 /* Clerk */; };
+		F393DA502DC9BD1B00BB1CE2 /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */; };
+		F393DA522DC9BD2E00BB1CE2 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */; };
+		F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */; };
+		F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA552DC9D4E700BB1CE2 /* Untitled.swift */; };
+		F393DA592DC9F49500BB1CE2 /* SingleTaskListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA582DC9F49500BB1CE2 /* SingleTaskListItem.swift */; };
+		F393DA5B2DCA8D0200BB1CE2 /* TaskDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA5A2DCA8D0200BB1CE2 /* TaskDetailsScreen.swift */; };
+		F393DA5F2DCA925500BB1CE2 /* TaskFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA5E2DCA925500BB1CE2 /* TaskFilterSheet.swift */; };
+		F393DA612DCAA8B200BB1CE2 /* CreateTaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA602DCAA8B200BB1CE2 /* CreateTaskScreen.swift */; };
 		F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */; };
 		F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */; };
 		F3E463302DC87FCD000D5AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */; };
 		F3E463332DC87FCD000D5AC8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E463322DC87FCD000D5AC8 /* Preview Assets.xcassets */; };
+		F3E463462DC91655000D5AC8 /* TabUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463452DC91655000D5AC8 /* TabUIView.swift */; };
+		F3E463492DC91696000D5AC8 /* TasksScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463482DC91696000D5AC8 /* TasksScreen.swift */; };
+		F3E4634C2DC916A8000D5AC8 /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4634B2DC916A8000D5AC8 /* DashboardScreen.swift */; };
+		F3E4634F2DC916D2000D5AC8 /* NotesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4634E2DC916D2000D5AC8 /* NotesScreen.swift */; };
+		F3E463522DC916EF000D5AC8 /* ProjectsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463512DC916EF000D5AC8 /* ProjectsScreen.swift */; };
+		F3E463552DC91708000D5AC8 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463542DC91708000D5AC8 /* EventsScreen.swift */; };
+		F3E463582DC91A6A000D5AC8 /* AuthUIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
+		F393DA552DC9D4E700BB1CE2 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		F393DA582DC9F49500BB1CE2 /* SingleTaskListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskListItem.swift; sourceTree = "<group>"; };
+		F393DA5A2DCA8D0200BB1CE2 /* TaskDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsScreen.swift; sourceTree = "<group>"; };
+		F393DA5E2DCA925500BB1CE2 /* TaskFilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFilterSheet.swift; sourceTree = "<group>"; };
+		F393DA602DCAA8B200BB1CE2 /* CreateTaskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskScreen.swift; sourceTree = "<group>"; };
 		F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taskflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskflow_iosApp.swift; sourceTree = "<group>"; };
 		F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3E463322DC87FCD000D5AC8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F3E463452DC91655000D5AC8 /* TabUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUIView.swift; sourceTree = "<group>"; };
+		F3E463482DC91696000D5AC8 /* TasksScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksScreen.swift; sourceTree = "<group>"; };
+		F3E4634B2DC916A8000D5AC8 /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
+		F3E4634E2DC916D2000D5AC8 /* NotesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesScreen.swift; sourceTree = "<group>"; };
+		F3E463512DC916EF000D5AC8 /* ProjectsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsScreen.swift; sourceTree = "<group>"; };
+		F3E463542DC91708000D5AC8 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
+		F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,12 +57,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F393DA572DC9F47E00BB1CE2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F393DA582DC9F49500BB1CE2 /* SingleTaskListItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F3E4631F2DC87FCB000D5AC8 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +91,10 @@
 		F3E4632A2DC87FCB000D5AC8 /* taskflow-ios */ = {
 			isa = PBXGroup;
 			children = (
+				F393DA552DC9D4E700BB1CE2 /* Untitled.swift */,
+				F3E4633D2DC88322000D5AC8 /* Features */,
+				F3E4633B2DC88122000D5AC8 /* Models */,
+				F3E4633A2DC8811B000D5AC8 /* Services */,
 				F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */,
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
 				F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */,
@@ -65,6 +109,145 @@
 				F3E463322DC87FCD000D5AC8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3E4633A2DC8811B000D5AC8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F3E4633B2DC88122000D5AC8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3E4633D2DC88322000D5AC8 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				F3E4634A2DC9169A000D5AC8 /* Dashboard */,
+				F3E463432DC9162D000D5AC8 /* Tab */,
+				F3E463422DC8834B000D5AC8 /* Onboarding */,
+				F3E463412DC88346000D5AC8 /* Notes */,
+				F3E463402DC8833F000D5AC8 /* Projects */,
+				F3E4633F2DC88331000D5AC8 /* Events */,
+				F3E4633E2DC88328000D5AC8 /* Tasks */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		F3E4633E2DC88328000D5AC8 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				F393DA572DC9F47E00BB1CE2 /* Components */,
+				F3E463472DC91682000D5AC8 /* Screens */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		F3E4633F2DC88331000D5AC8 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463532DC916F9000D5AC8 /* Screen */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		F3E463402DC8833F000D5AC8 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463502DC916E0000D5AC8 /* Screen */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		F3E463412DC88346000D5AC8 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				F3E4634D2DC916C5000D5AC8 /* Screen */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		F3E463422DC8834B000D5AC8 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463562DC918EB000D5AC8 /* Screens */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F3E463432DC9162D000D5AC8 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463442DC9163F000D5AC8 /* Screens */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		F3E463442DC9163F000D5AC8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463452DC91655000D5AC8 /* TabUIView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		F3E463472DC91682000D5AC8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463482DC91696000D5AC8 /* TasksScreen.swift */,
+				F393DA5A2DCA8D0200BB1CE2 /* TaskDetailsScreen.swift */,
+				F393DA5E2DCA925500BB1CE2 /* TaskFilterSheet.swift */,
+				F393DA602DCAA8B200BB1CE2 /* CreateTaskScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		F3E4634A2DC9169A000D5AC8 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				F3E4634B2DC916A8000D5AC8 /* DashboardScreen.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		F3E4634D2DC916C5000D5AC8 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F3E4634E2DC916D2000D5AC8 /* NotesScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		F3E463502DC916E0000D5AC8 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463512DC916EF000D5AC8 /* ProjectsScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		F3E463532DC916F9000D5AC8 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463542DC91708000D5AC8 /* EventsScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		F3E463562DC918EB000D5AC8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				F3E463572DC91A6A000D5AC8 /* AuthUIScreen.swift */,
+				F393DA4F2DC9BD1B00BB1CE2 /* SignInScreen.swift */,
+				F393DA512DC9BD2E00BB1CE2 /* SignUpScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +266,9 @@
 			dependencies = (
 			);
 			name = "taskflow-ios";
+			packageProductDependencies = (
+				F393DA4B2DC9B55C00BB1CE2 /* Clerk */,
+			);
 			productName = "taskflow-ios";
 			productReference = F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -95,7 +281,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					F3E463272DC87FCB000D5AC8 = {
 						CreatedOnToolsVersion = 14.3;
@@ -111,6 +297,9 @@
 				Base,
 			);
 			mainGroup = F3E4631F2DC87FCB000D5AC8;
+			packageReferences = (
+				F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */,
+			);
 			productRefGroup = F3E463292DC87FCB000D5AC8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,8 +326,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3E463582DC91A6A000D5AC8 /* AuthUIScreen.swift in Sources */,
+				F393DA502DC9BD1B00BB1CE2 /* SignInScreen.swift in Sources */,
+				F393DA5F2DCA925500BB1CE2 /* TaskFilterSheet.swift in Sources */,
+				F393DA5B2DCA8D0200BB1CE2 /* TaskDetailsScreen.swift in Sources */,
+				F393DA522DC9BD2E00BB1CE2 /* SignUpScreen.swift in Sources */,
+				F393DA612DCAA8B200BB1CE2 /* CreateTaskScreen.swift in Sources */,
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
+				F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */,
+				F3E4634F2DC916D2000D5AC8 /* NotesScreen.swift in Sources */,
+				F3E463552DC91708000D5AC8 /* EventsScreen.swift in Sources */,
+				F393DA592DC9F49500BB1CE2 /* SingleTaskListItem.swift in Sources */,
 				F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */,
+				F3E463492DC91696000D5AC8 /* TasksScreen.swift in Sources */,
+				F3E463462DC91655000D5AC8 /* TabUIView.swift in Sources */,
+				F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */,
+				F3E463522DC916EF000D5AC8 /* ProjectsScreen.swift in Sources */,
+				F3E4634C2DC916A8000D5AC8 /* DashboardScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,8 +383,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -195,7 +401,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -239,8 +445,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -249,7 +457,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -267,7 +475,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"taskflow-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -275,6 +482,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +504,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"taskflow-ios/Preview Content\"";
-				DEVELOPMENT_TEAM = QG3YZK6HZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -304,6 +511,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +547,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/clerk/clerk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.56.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F393DA4B2DC9B55C00BB1CE2 /* Clerk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F393DA4A2DC9B55C00BB1CE2 /* XCRemoteSwiftPackageReference "clerk-ios" */;
+			productName = Clerk;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3E463202DC87FCB000D5AC8 /* Project object */;
 }

@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import Clerk
 
 @main
 struct taskflow_iosApp: App {
+    @State private var clerk = Clerk.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                   if clerk.isLoaded {
+                     ContentView()
+                   } else {
+                     ContentView()
+                   }
+                 }
+                 .environment(clerk)
+                 .task {
+                   clerk.configure(publishableKey: "pk_test_aW52aXRpbmctbWlubm93LTk2LmNsZXJrLmFjY291bnRzLmRldiQ")
+                   try? await clerk.load()
+                 }
+            }
         }
     }
-}

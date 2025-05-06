@@ -6,21 +6,19 @@
 //
 
 import SwiftUI
+import Clerk
 
 struct ContentView: View {
+    @State private var isLoggin = false
+    @Environment(Clerk.self) private var clerk
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack{
+            if let user = clerk.user {
+                TabUIView()
+            } else {
+                TabUIView()
+            }
         }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
