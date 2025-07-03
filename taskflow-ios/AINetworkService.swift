@@ -70,14 +70,13 @@ class AINetworkService {
         return response.response.candidates.first?.content.parts.first?.text
     }
     
-    func fetchAiResponse(complete: @escaping (Result<String, Error>) -> Void){
+    func fetchAiResponse(prompt:String = "What is the most popular sport in the world?") async throws -> String{
         let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
         //let baseUrl = "http://localhost:3001"
         let urlString = "\(baseUrl)/api/test-ai/generate-test"
         
         guard let url = URL(string: urlString) else {
-            complete(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-            return
+           throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
         }
         
         var request = URLRequest(url: url)
@@ -87,31 +86,24 @@ class AINetworkService {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         do{
-            request.httpBody = try encoder.encode(Prompt(text: "What is the most popular sport in the world?"))
+            request.httpBody = try encoder.encode(Prompt(text: prompt))
         } catch {
-            complete(.failure(error))
-            return
+            throw NSError(domain: "Error encoding JSON", code: 0)
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                complete(.failure(error))
-                return
+        do{
+            let (data, _) = try await URLSession.shared.data(for: request)
+            
+            let aiResponse = try JSONDecoder().decode(GeminiResponse.self, from: data)
+            
+            guard let modelText = extractTextResponse(from: aiResponse) else {
+                throw NSError(domain: "No Text", code: 0)
             }
             
-            guard let data = data else {
-                complete(.failure(NSError(domain: "No data returned", code: 0, userInfo: nil)))
-                return
-            }
+            return modelText
             
-            do{
-                let aiResponse = try JSONDecoder().decode(GeminiResponse.self, from: data)
-                guard let modelText = self.extractTextResponse(from: aiResponse) else { complete(.failure(NSError(domain: "No Text", code: 0, userInfo: nil)))
-                return }
-                complete(.success(modelText))
-            } catch {
-                complete(.failure(error))
-            }
-        }.resume()
+        } catch {
+            throw NSError(domain: "Error fetching data", code: 0)
+        }
     }
 }

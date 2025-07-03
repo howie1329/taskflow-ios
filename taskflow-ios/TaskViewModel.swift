@@ -14,32 +14,25 @@ class TaskViewModel:ObservableObject {
     var taskArr: [TaskEvent] = []
     var aiChat: String = ""
     var isLoading: Bool = false
+    private let userID = "user_2usb0Md2SjCvMehu1XHJBN2y03c"
     
     init(){
        
     }
     
+    @MainActor
     func loadTasks() async {
         self.isLoading = true
-        NetworkService.shared.fetchTasksFromServer(userId: "user_2usb0Md2SjCvMehu1XHJBN2y03c") { result in
-            switch result {
-            case .success(let tasks):
-                print("Fetched Tasks Complete")
-                self.taskArr = tasks
-            case .failure(let error):
-                print("Error fetching tasks: \(error)")
-            }
+        
+        defer{
+            self.isLoading = false
         }
-        
-        self.isLoading = false
-        
-        AINetworkService.shared.fetchAiResponse{ result in
-            switch result {
-            case .success(let response):
-                print("Fetched AI Response \(response)")
-                self.aiChat = response
-            case .failure(let error):
-                print("Error fetching AI response: \(error)")
+        await withTaskGroup(of: Void.self){group in
+            group.addTask {
+                await self.loadTaskFromServer()
+            }
+            group.addTask{
+                await self.loadAiResponse()
             }
         }
         
@@ -55,6 +48,26 @@ class TaskViewModel:ObservableObject {
             priority: "medium",
             isCompleted: true,
         ))
+    }
+    
+    @MainActor
+    private func loadTaskFromServer() async {
+        do{
+            let response = try await NetworkService.shared.fetchTasksFromServer(userId: userID)
+            self.taskArr = response
+        } catch {
+            print("Error fetching tasks: \(error)")
+        }
+    }
+    
+    @MainActor
+    private func loadAiResponse() async {
+        do{
+            let response = try await AINetworkService.shared.fetchAiResponse()
+            self.aiChat = response
+        } catch {
+            print("Error fetching AI response: \(error)")
+        }
     }
     
 }
