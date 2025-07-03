@@ -148,16 +148,7 @@ var dummyTaskArray: [Tasks] = [
         category: ["Personal"],
         status: .notStarted
     ),
-    Tasks(
-        id: UUID(),
-        title: "Update Resume",
-        description: "Add recent experience and skills",
-        dueDate: Date().addingTimeInterval(86400 * 4), // 4 days from now
-        priority: .medium,
-        isCompleted: true,
-        category: ["Work"],
-        status: .completed
-    )
+    
 ]
 
 // ... existing code ...

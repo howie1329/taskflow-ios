@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct taskflow_iosApp: App {
+    @StateObject var taskviewModel = TaskViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
             }
+        .environmentObject(taskviewModel)
         }
     }

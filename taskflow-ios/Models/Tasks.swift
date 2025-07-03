@@ -31,3 +31,13 @@ enum TaskStatus: String, CaseIterable{
     case completed = "Completed"
     case overDue = "Over Due"
 }
+
+
+struct TaskEvent: Codable, Identifiable{
+    let id: String
+    let title: String
+    var description: String
+    var date: String?
+    var priority: String
+    var isCompleted: Bool
+}
