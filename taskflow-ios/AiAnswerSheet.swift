@@ -100,7 +100,7 @@ struct AiAnswerSheet: View {
         guard !userPrompt.isEmpty else { return }
         isTextFieldFocused = false
         Task {
-            await taskViewModel.loadAiQuestionResponse(userPrompt: userPrompt)
+            await taskViewModel.askAiTaskQuestion(userPromot: userPrompt)
         }
     }
     

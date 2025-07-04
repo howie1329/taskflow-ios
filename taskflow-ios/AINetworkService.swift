@@ -70,9 +70,9 @@ class AINetworkService {
         return response.response.candidates.first?.content.parts.first?.text
     }
     
-    func fetchAiResponse(prompt:String = "What is the most popular sport in the world?") async throws -> String{
-        let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
-        //let baseUrl = "http://localhost:3001"
+    func fetchAiResponse(prompt:String) async throws -> String{
+        //let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
+        let baseUrl = "http://localhost:3001"
         let urlString = "\(baseUrl)/api/test-ai/generate-test"
         
         guard let url = URL(string: urlString) else {
@@ -110,3 +110,41 @@ class AINetworkService {
         }
     }
 }
+
+extension AINetworkService {
+    //MARK: Prompt Building -- Ai Fetching -- Task Context
+    
+    private func formatTaskList(_ taskContext: [TaskEvent]) -> String{
+        let taskList =  taskContext.map{ task in
+            return """
+            \(task.title) Priority: \(task.priority)
+            Description: \(task.description)
+            Completed: \(task.isCompleted)
+            """
+        }.joined(separator: "\n\n")
+        
+        return taskList
+    }
+    
+    private func buildUserPromptForAiResponse(taskContext: [TaskEvent], userPrompt: String) -> String {
+        let taskList = formatTaskList(taskContext)
+        let prompt: String = """
+        Based on my current tasks listed below, please answer this question: \(userPrompt)
+        
+        My Tasks:
+        \(taskList)
+        
+        Please provide a helpful answer based on these tasks. If you can't answer the question from the available task information, please let me know what additional details would be helpful.
+"""
+        
+        return prompt
+    }
+    
+    func AiTaskResponseAPICall(taskContext: [TaskEvent], userPrompt: String) async throws -> String {
+        let prompt = buildUserPromptForAiResponse(taskContext: taskContext, userPrompt: userPrompt)
+        return try await fetchAiResponse(prompt: prompt)
+    }
+    
+}
+
+

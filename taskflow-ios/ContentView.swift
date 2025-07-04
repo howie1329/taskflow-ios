@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
     @State var showingAiSheet: Bool = false
+    @State var showingEventSheet: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -45,6 +46,7 @@ struct ContentView: View {
                             
                     }
             .aiAnswerSheet(isPresented: $showingAiSheet)
+            .eventViewSheet(isPresented: $showingEventSheet)
             .navigationTitle(Text("Task Flow"))
             .toolbar{
                 ToolbarItem(placement:.topBarTrailing){
@@ -52,6 +54,12 @@ struct ContentView: View {
                         taskViewModel.addTask()
                     } label: {
                         Text("Add Task")
+                    }
+                }
+                
+                ToolbarItem(placement:.topBarLeading){
+                    Button("Event"){
+                        showingEventSheet = true
                     }
                 }
                 

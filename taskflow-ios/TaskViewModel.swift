@@ -31,9 +31,6 @@ class TaskViewModel:ObservableObject {
             group.addTask {
                 await self.loadTaskFromServer()
             }
-            group.addTask{
-                await self.loadAiResponse()
-            }
         }
         
         
@@ -63,7 +60,7 @@ class TaskViewModel:ObservableObject {
     @MainActor
     private func loadAiResponse() async {
         do{
-            let response = try await AINetworkService.shared.fetchAiResponse()
+            let response = try await AINetworkService.shared.fetchAiResponse(prompt: "What is 2 + 2")
             self.aiChat = response
         } catch {
             print("Error fetching AI response: \(error)")
@@ -75,6 +72,15 @@ class TaskViewModel:ObservableObject {
         do{
             let response = try await AINetworkService.shared.fetchAiResponse(prompt: userPrompt)
             self.aiChat = response
+        } catch {
+            print("Error fetching AI response: \(error)")
+        }
+    }
+    
+    @MainActor
+    func askAiTaskQuestion(userPromot: String) async {
+        do{
+            self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot)
         } catch {
             print("Error fetching AI response: \(error)")
         }

@@ -14,6 +14,7 @@ struct taskflow_iosApp: App {
     var body: some Scene {
         WindowGroup {
            ContentView()
+            //EventView()
             }
         .environmentObject(taskviewModel)
         }
