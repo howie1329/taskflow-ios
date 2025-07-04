@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
+    @State var showingAiSheet: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -17,20 +18,6 @@ struct ContentView: View {
                             ProgressView("Loading tasks...")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }else {
-                            
-                            
-                            if !taskViewModel.aiChat.isEmpty{
-                                VStack(alignment: .leading) {
-                                        Text("AI Response:")
-                                            .font(.headline)
-                                        Text(taskViewModel.aiChat)
-                                            .padding()
-                                            .background(Color.gray.opacity(0.1))
-                                            .cornerRadius(8)
-                                    }
-                                    .padding()
-                            }
-                            
                             List(taskViewModel.taskArr){task in
                                 VStack(alignment: .leading, spacing: 4) {
                                         Text(task.title)
@@ -57,6 +44,7 @@ struct ContentView: View {
                         }
                             
                     }
+            .aiAnswerSheet(isPresented: $showingAiSheet)
             .navigationTitle(Text("Task Flow"))
             .toolbar{
                 ToolbarItem(placement:.topBarTrailing){
@@ -64,6 +52,14 @@ struct ContentView: View {
                         taskViewModel.addTask()
                     } label: {
                         Text("Add Task")
+                    }
+                }
+                
+                ToolbarItem(placement:.topBarLeading){
+                    Button{
+                        showingAiSheet = true
+                    } label: {
+                            Text("AI")
                     }
                 }
             }

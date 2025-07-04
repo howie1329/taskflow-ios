@@ -30,7 +30,7 @@ struct ResponseData: Codable {
 struct Candidate: Codable {
     let content: Content
     let finishReason: String
-    let avgLogprobs: Double
+    let avgLogprobs: Double?
 }
 
 // MARK: - Content
@@ -50,7 +50,7 @@ struct UsageMetadata: Codable {
     let candidatesTokenCount: Int
     let totalTokenCount: Int
     let promptTokensDetails: [TokenDetail]
-    let candidatesTokensDetails: [TokenDetail]
+    let candidatesTokensDetails: [TokenDetail]?
 }
 
 // MARK: - Token Detail
@@ -93,8 +93,11 @@ class AINetworkService {
         
         do{
             let (data, _) = try await URLSession.shared.data(for: request)
+            print("Inside Bottom Do Statement: \(data)")
             
             let aiResponse = try JSONDecoder().decode(GeminiResponse.self, from: data)
+            
+            
             
             guard let modelText = extractTextResponse(from: aiResponse) else {
                 throw NSError(domain: "No Text", code: 0)

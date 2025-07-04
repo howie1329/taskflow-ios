@@ -70,4 +70,14 @@ class TaskViewModel:ObservableObject {
         }
     }
     
+    @MainActor
+    func loadAiQuestionResponse(userPrompt: String) async {
+        do{
+            let response = try await AINetworkService.shared.fetchAiResponse(prompt: userPrompt)
+            self.aiChat = response
+        } catch {
+            print("Error fetching AI response: \(error)")
+        }
+    }
+    
 }

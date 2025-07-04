@@ -13,6 +13,7 @@
 		F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA552DC9D4E700BB1CE2 /* Untitled.swift */; };
 		F39D67522E1619DD0004EEC0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67512E1619D70004EEC0 /* NetworkService.swift */; };
 		F39D67542E16405C0004EEC0 /* AINetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67532E1640550004EEC0 /* AINetworkService.swift */; };
+		F39D67562E166F1A0004EEC0 /* AiAnswerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */; };
 		F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */; };
 		F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */; };
 		F3E463302DC87FCD000D5AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		F393DA552DC9D4E700BB1CE2 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		F39D67512E1619D70004EEC0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F39D67532E1640550004EEC0 /* AINetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AINetworkService.swift; sourceTree = "<group>"; };
+		F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiAnswerSheet.swift; sourceTree = "<group>"; };
 		F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taskflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskflow_iosApp.swift; sourceTree = "<group>"; };
 		F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
 				F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */,
 				F3E463312DC87FCD000D5AC8 /* Preview Content */,
+				F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */,
 			);
 			path = "taskflow-ios";
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
+				F39D67562E166F1A0004EEC0 /* AiAnswerSheet.swift in Sources */,
 				F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */,
 				F356DF742E15C011009898C3 /* TaskViewModel.swift in Sources */,
 				F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */,
