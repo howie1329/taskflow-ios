@@ -9,9 +9,12 @@ import SwiftUI
 
 struct AiAnswerSheet: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
+    @State var mainChatThread: MainChatThread
     @State private var userPrompt: String = ""
     @State private var isPresented: Bool = false
-    @State private var chatMessages: [ChatMessage] = []
+    var messages:[ChatMessage] {
+        return mainChatThread.messages
+    }
     @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
@@ -36,6 +39,7 @@ struct AiAnswerSheet: View {
         VStack(spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
+                    Text(mainChatThread.title)
                     Text("AI Assistant")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -53,8 +57,8 @@ struct AiAnswerSheet: View {
                         .foregroundColor(.red)
                         .font(.title3)
                 }
-                .opacity(chatMessages.count > 1 ? 1 : 0)
-                .animation(.easeInOut(duration: 0.3), value: chatMessages.count)
+                .opacity(messages.count > 1 ? 1 : 0)
+                .animation(.easeInOut(duration: 0.3), value: messages.count)
             }
             
             Divider()
@@ -69,9 +73,9 @@ struct AiAnswerSheet: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(chatMessages) { message in
-                        ChatBubbleView(message: message)
-                            .id(message.id)
+                    ForEach(mainChatThread.messages) { item in
+                        ChatBubbleView(message: item)
+                            .id(item.id)
                     }
                     
                     if taskViewModel.isLoading {
@@ -82,9 +86,9 @@ struct AiAnswerSheet: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             }
-            .onChange(of: chatMessages.count) { _, _ in
+            .onChange(of: mainChatThread.messages.count) { _, _ in
                 withAnimation(.easeOut(duration: 0.3)) {
-                    proxy.scrollTo(chatMessages.last?.id ?? "typing", anchor: .bottom)
+                    proxy.scrollTo(messages.last?.id ?? "typing", anchor: .bottom)
                 }
             }
             .onChange(of: taskViewModel.isLoading) { _, isLoading in
@@ -133,8 +137,8 @@ struct AiAnswerSheet: View {
     
     // MARK: - Methods
     private func setupWelcomeMessage() {
-        if chatMessages.isEmpty {
-            chatMessages.append(ChatMessage(
+        if mainChatThread.messages.isEmpty {
+            mainChatThread.append(ChatMessage(
                 id: UUID().uuidString,
                 content: "Hi! I'm your AI assistant. I can help you with your tasks, answer questions, and provide insights. What would you like to know?",
                 isUser: false,
@@ -153,7 +157,8 @@ struct AiAnswerSheet: View {
             timestamp: Date()
         )
         
-        chatMessages.append(userMessage)
+        mainChatThread.append(userMessage)
+        print(mainChatThread.messages)
         let currentPrompt = userPrompt
         userPrompt = ""
         isTextFieldFocused = false
@@ -177,7 +182,7 @@ struct AiAnswerSheet: View {
                 )
                 
                 await MainActor.run {
-                    chatMessages.append(aiMessage)
+                    mainChatThread.append(aiMessage)
                 }
             }
         }
@@ -185,7 +190,7 @@ struct AiAnswerSheet: View {
     
     private func clearChat() {
         withAnimation(.easeInOut(duration: 0.3)) {
-            chatMessages.removeAll()
+            mainChatThread.messages.removeAll()
             setupWelcomeMessage()
         }
     }
@@ -326,10 +331,10 @@ struct RoundedCorner: Shape {
 
 // MARK: - Sheet Extension
 extension View {
-    func aiAnswerSheet(isPresented: Binding<Bool>) -> some View {
+    func aiAnswerSheet(isPresented: Binding<Bool>, mainChatThread: MainChatThread) -> some View {
         self.sheet(isPresented: isPresented) {
             NavigationView {
-                AiAnswerSheet()
+                AiAnswerSheet(mainChatThread: mainChatThread)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -341,9 +346,4 @@ extension View {
             }
         }
     }
-}
-
-#Preview {
-    AiAnswerSheet()
-        .environmentObject(TaskViewModel())
 }

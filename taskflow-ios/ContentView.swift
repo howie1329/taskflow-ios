@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
-    @State var showingAiSheet: Bool = false
-    @State var showingEventSheet: Bool = false
     
     var body: some View {
         TabView {
@@ -27,9 +25,13 @@ struct ContentView: View {
                     Image(systemName: "checklist")
                     Text("Tasks")
                 }
+            // AI Main Chat Tab
+            AIChatsView()
+                .tabItem{
+                    Image(systemName: "brain.head.profile")
+                    Text("AI")
+                }
         }
-        .aiAnswerSheet(isPresented: $showingAiSheet)
-        .eventViewSheet(isPresented: $showingEventSheet)
         .task {
             await taskViewModel.loadTasks()
         }
