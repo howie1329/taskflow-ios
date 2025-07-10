@@ -126,22 +126,41 @@ extension AINetworkService {
         return taskList
     }
     
-    private func buildUserPromptForAiResponse(taskContext: [TaskEvent], userPrompt: String) -> String {
+    private func formatChatHistory(_ chatHistory: [ChatMessage]) -> String {
+        let chatHistoryString = chatHistory.map { chatMessage in
+            return "Is User:\(chatMessage.isUser): Message: \(chatMessage.content)"
+        }.joined(separator: "\n\n")
+        
+        return chatHistoryString
+    }
+    
+    private func buildUserPromptForAiResponse(taskContext: [TaskEvent], userPrompt: String, chatHistory:[ChatMessage]? = nil ) -> String {
         let taskList = formatTaskList(taskContext)
+        let chatHistoryText: String
+        
+        if let chatHistory = chatHistory {
+            chatHistoryText = formatChatHistory(chatHistory)
+        } else {
+            chatHistoryText = "No Chat History"
+        }
+        
         let prompt: String = """
         Based on my current tasks listed below, please answer this question: \(userPrompt)
         
         My Tasks:
         \(taskList)
+
+        Our past chat history:
+        \(chatHistoryText)
         
-        Please provide a helpful answer based on these tasks. If you can't answer the question from the available task information, please let me know what additional details would be helpful.
+        Please provide a helpful answer based on these tasks and past chat history. If you can't answer the question from the available task information, please let me know what additional details would be helpful. Also the use may ask questions that are not related to the task list, so for those questions you can answer directly. When answering question be percise.
 """
         
         return prompt
     }
     
-    func AiTaskResponseAPICall(taskContext: [TaskEvent], userPrompt: String) async throws -> String {
-        let prompt = buildUserPromptForAiResponse(taskContext: taskContext, userPrompt: userPrompt)
+    func AiTaskResponseAPICall(taskContext: [TaskEvent], userPrompt: String, chatHistory:[ChatMessage]? = nil) async throws -> String {
+        let prompt = buildUserPromptForAiResponse(taskContext: taskContext, userPrompt: userPrompt, chatHistory: chatHistory)
         return try await fetchAiResponse(prompt: prompt)
     }
     

@@ -78,9 +78,9 @@ class TaskViewModel:ObservableObject {
     }
     
     @MainActor
-    func askAiTaskQuestion(userPromot: String) async {
+    func askAiTaskQuestion(userPromot: String, chatHistory: [ChatMessage]? = nil) async {
         do{
-            self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot)
+            self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot, chatHistory: chatHistory)
         } catch {
             print("Error fetching AI response: \(error)")
         }

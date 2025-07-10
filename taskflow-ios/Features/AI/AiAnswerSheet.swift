@@ -170,7 +170,7 @@ struct AiAnswerSheet: View {
     
     private func askQuestion(prompt: String) {
         Task {
-            await taskViewModel.askAiTaskQuestion(userPromot: prompt)
+            await taskViewModel.askAiTaskQuestion(userPromot: prompt, chatHistory: messages)
             
             // Add AI response to chat
             if !taskViewModel.aiChat.isEmpty {
