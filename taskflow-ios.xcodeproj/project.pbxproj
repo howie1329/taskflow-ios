@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,10 @@
 		F3E463322DC87FCD000D5AC8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F3EDDE2A2E1D1CF900FE0F11 /* Features */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Features; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		F3E463252DC87FCB000D5AC8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -67,6 +71,7 @@
 		F3E4632A2DC87FCB000D5AC8 /* taskflow-ios */ = {
 			isa = PBXGroup;
 			children = (
+				F3EDDE2A2E1D1CF900FE0F11 /* Features */,
 				F39D67532E1640550004EEC0 /* AINetworkService.swift */,
 				F39D67512E1619D70004EEC0 /* NetworkService.swift */,
 				F356DF732E15C00F009898C3 /* TaskViewModel.swift */,
@@ -112,6 +117,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F3EDDE2A2E1D1CF900FE0F11 /* Features */,
 			);
 			name = "taskflow-ios";
 			packageProductDependencies = (

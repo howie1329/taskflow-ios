@@ -7,148 +7,125 @@
 
 import Foundation
 
-var dummyTaskArray: [Tasks] = [
-    Tasks(
-        id: UUID(),
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    return formatter
+}()
+
+var dummyTaskArray: [TaskEvent] = [
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Complete Project Proposal",
         description: "Write and submit the project proposal for the new client",
-        dueDate: Date().addingTimeInterval(86400 * 2), // 2 days from now
-        priority: .high,
-        isCompleted: false,
-        category: ["Work"],
-        status: .inProgress
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 2)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Grocery Shopping",
         description: "Buy groceries for the week including fruits and vegetables",
-        dueDate: Date().addingTimeInterval(86400), // 1 day from now
-        priority: .medium,
-        isCompleted: false,
-        category: ["Personal"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400)),
+        priority: "medium",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Team Meeting",
         description: "Weekly team sync to discuss project progress",
-        dueDate: Date().addingTimeInterval(3600 * 2), // 2 hours from now
-        priority: .high,
-        isCompleted: false,
-        category: ["Work"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(3600 * 2)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Gym Session",
         description: "Complete the scheduled workout routine",
-        dueDate: Date().addingTimeInterval(3600 * 4), // 4 hours from now
-        priority: .medium,
-        isCompleted: false,
-        category: ["Health"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(3600 * 4)),
+        priority: "medium",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Read Book",
         description: "Read chapters 5-7 of the current book",
-        dueDate: Date().addingTimeInterval(86400 * 3), // 3 days from now
-        priority: .low,
-        isCompleted: false,
-        category: ["Personal","Self Growth"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 3)),
+        priority: "low",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Doctor Appointment",
         description: "Annual physical checkup",
-        dueDate: Date().addingTimeInterval(86400 * 5), // 5 days from now
-        priority: .high,
-        isCompleted: false,
-        category: ["Health"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 5)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Call Mom",
         description: "Catch up with mom over the phone",
-        dueDate: Date().addingTimeInterval(86400), // 1 day from now
-        priority: .medium,
-        isCompleted: false,
-        category: ["Personal"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400)),
+        priority: "medium",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Submit Expense Report",
         description: "Submit last month's expense report to finance",
-        dueDate: Date().addingTimeInterval(86400 * 2), // 2 days from now
-        priority: .high,
-        isCompleted: false,
-        category: ["Work"],
-        status: .inProgress
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 2)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Car Maintenance",
         description: "Take the car for oil change and tire rotation",
-        dueDate: Date().addingTimeInterval(86400 * 7), // 7 days from now
-        priority: .low,
-        isCompleted: false,
-        category: ["Personal"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 7)),
+        priority: "low",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Yoga Class",
         description: "Attend the weekly yoga class at the community center",
-        dueDate: Date().addingTimeInterval(3600 * 24), // 1 day from now
-        priority: .medium,
-        isCompleted: false,
-        category: ["Health"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(3600 * 24)),
+        priority: "medium",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Finish Online Course",
         description: "Complete the final module and quiz",
-        dueDate: Date().addingTimeInterval(-86400), // 1 day ago (overdue)
-        priority: .high,
-        isCompleted: false,
-        category: ["Self Growth"],
-        status: .overDue
+        date: dateFormatter.string(from: Date().addingTimeInterval(-86400)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Laundry",
         description: "Wash and fold clothes",
-        dueDate: Date().addingTimeInterval(3600 * 6), // 6 hours from now
-        priority: .low,
-        isCompleted: false,
-        category: ["Personal"],
-        status: .notStarted
+        date: dateFormatter.string(from: Date().addingTimeInterval(3600 * 6)),
+        priority: "low",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Submit Tax Documents",
         description: "Send tax documents to accountant",
-        dueDate: Date().addingTimeInterval(-86400 * 2), // 2 days ago (overdue)
-        priority: .high,
-        isCompleted: false,
-        category: ["Finance"],
-        status: .overDue
+        date: dateFormatter.string(from: Date().addingTimeInterval(-86400 * 2)),
+        priority: "high",
+        isCompleted: false
     ),
-    Tasks(
-        id: UUID(),
+    TaskEvent(
+        id: UUID().uuidString,
         title: "Plan Vacation",
         description: "Research and book flights and hotels",
-        dueDate: Date().addingTimeInterval(86400 * 10), // 10 days from now
-        priority: .medium,
-        isCompleted: false,
-        category: ["Personal"],
-        status: .notStarted
-    ),
-    
+        date: dateFormatter.string(from: Date().addingTimeInterval(86400 * 10)),
+        priority: "medium",
+        isCompleted: false
+    )
 ]
 
 // ... existing code ...

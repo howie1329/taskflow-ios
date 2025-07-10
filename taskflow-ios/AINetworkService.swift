@@ -71,8 +71,8 @@ class AINetworkService {
     }
     
     func fetchAiResponse(prompt:String) async throws -> String{
-        //let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
-        let baseUrl = "http://localhost:3001"
+        let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
+        //let baseUrl = "http://localhost:3001"
         let urlString = "\(baseUrl)/api/test-ai/generate-test"
         
         guard let url = URL(string: urlString) else {
