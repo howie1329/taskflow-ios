@@ -12,7 +12,7 @@ struct AiAnswerSheet: View {
     @State var mainChatThread: MainChatThread
     @State private var userPrompt: String = ""
     @State private var isPresented: Bool = false
-    var messages:[ChatMessage] {
+    var messages:[NewChatMessage] {
         return mainChatThread.messages
     }
     @FocusState private var isTextFieldFocused: Bool
@@ -138,10 +138,10 @@ struct AiAnswerSheet: View {
     // MARK: - Methods
     private func setupWelcomeMessage() {
         if mainChatThread.messages.isEmpty {
-            mainChatThread.append(ChatMessage(
+            mainChatThread.append(NewChatMessage(
                 id: UUID().uuidString,
+                role: "assistant",
                 content: "Hi! I'm your AI assistant. I can help you with your tasks, answer questions, and provide insights. What would you like to know?",
-                isUser: false,
                 timestamp: Date()
             ))
         }
@@ -150,10 +150,10 @@ struct AiAnswerSheet: View {
     private func sendMessage() {
         guard canSendMessage else { return }
         
-        let userMessage = ChatMessage(
+        let userMessage = NewChatMessage(
             id: UUID().uuidString,
+            role: "user",
             content: userPrompt.trimmingCharacters(in: .whitespacesAndNewlines),
-            isUser: true,
             timestamp: Date()
         )
         
@@ -168,16 +168,16 @@ struct AiAnswerSheet: View {
         }
     }
     
-    private func askQuestion(prompt: String) {
+    private func askQuestion(prompt: String) async {
         Task {
             await taskViewModel.askAiTaskQuestion(userPromot: prompt, chatHistory: messages)
             
             // Add AI response to chat
             if !taskViewModel.aiChat.isEmpty {
-                let aiMessage = ChatMessage(
+                let aiMessage = NewChatMessage(
                     id: UUID().uuidString,
+                    role: "assistant",
                     content: taskViewModel.aiChat,
-                    isUser: false,
                     timestamp: Date()
                 )
                 
@@ -197,20 +197,28 @@ struct AiAnswerSheet: View {
 }
 
 // MARK: - Chat Message Model
-struct ChatMessage: Identifiable {
+struct ChatMessage: Identifiable, Codable {
     let id: String
     let content: String
     let isUser: Bool
     let timestamp: Date
 }
 
+// MARK: - New Chat Message Model
+struct NewChatMessage: Identifiable, Codable {
+    let id: String
+    let role: String
+    let content: String
+    let timestamp: Date
+}
+
 // MARK: - Chat Bubble View
 struct ChatBubbleView: View {
-    let message: ChatMessage
+    let message: NewChatMessage
     
     var body: some View {
         HStack {
-            if message.isUser {
+            if message.role == "user" {
                 Spacer(minLength: 60)
                 
                 VStack(alignment: .trailing, spacing: 4) {
@@ -225,6 +233,7 @@ struct ChatBubbleView: View {
                     Text(formatTime(message.timestamp))
                         .font(.caption2)
                         .foregroundColor(.secondary)
+                    
                 }
             } else {
                 VStack(alignment: .leading, spacing: 4) {
@@ -242,18 +251,16 @@ struct ChatBubbleView: View {
                             .cornerRadius(18)
                             .cornerRadius(4, corners: [.topLeft, .topRight, .bottomRight])
                     }
-                    
                     Text(formatTime(message.timestamp))
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                        .padding(.leading, 32)
                 }
                 
                 Spacer(minLength: 60)
             }
         }
         .transition(.asymmetric(
-            insertion: .move(edge: message.isUser ? .trailing : .leading).combined(with: .opacity),
+            insertion: .move(edge: message.role == "user" ? .trailing : .leading).combined(with: .opacity),
             removal: .opacity
         ))
     }

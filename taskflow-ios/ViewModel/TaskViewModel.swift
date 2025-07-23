@@ -56,7 +56,7 @@ class TaskViewModel:ObservableObject {
             print("Error fetching tasks: \(error)")
         }
     }
-    
+    /*
     @MainActor
     private func loadAiResponse() async {
         do{
@@ -75,12 +75,14 @@ class TaskViewModel:ObservableObject {
         } catch {
             print("Error fetching AI response: \(error)")
         }
-    }
+    } */
     
     @MainActor
-    func askAiTaskQuestion(userPromot: String, chatHistory: [ChatMessage]? = nil) async {
+    func askAiTaskQuestion(userPromot: String, chatHistory: [NewChatMessage]? = nil) async {
         do{
-            self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot, chatHistory: chatHistory)
+            self.isLoading = true
+            self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot, chatHistory: chatHistory, userId: self.userID)
+            self.isLoading = false
         } catch {
             print("Error fetching AI response: \(error)")
         }

@@ -28,13 +28,13 @@ class AiDataService {
 class MainChatThread: Identifiable {
     let id = UUID().uuidString
     var title:String
-    var messages: [ChatMessage] = []
+    var messages: [NewChatMessage] = []
     
     init(title: String) {
         self.title = title
     }
     
-    func append(_ message: ChatMessage) {
+    func append(_ message: NewChatMessage) {
         messages.append(message)
     }
 }
