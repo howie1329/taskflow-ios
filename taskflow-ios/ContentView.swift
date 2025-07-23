@@ -6,19 +6,39 @@
 //
 
 import SwiftUI
-import Clerk
 
 struct ContentView: View {
-    @State private var isLoggin = false
-    @Environment(Clerk.self) private var clerk
+    @EnvironmentObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        VStack{
-            if let user = clerk.user {
-                TabUIView()
-            } else {
-                TabUIView()
-            }
+        TabView {
+            // Dashboard Tab
+            DashboardView()
+                .tabItem {
+                    Image(systemName: "chart.bar.fill")
+                    Text("Dashboard")
+                }
+            
+            // Tasks Tab
+            TaskListView()
+                .tabItem {
+                    Image(systemName: "checklist")
+                    Text("Tasks")
+                }
+            // AI Main Chat Tab
+            AIChatsView()
+                .tabItem{
+                    Image(systemName: "brain.head.profile")
+                    Text("AI")
+                }
+        }
+        .task {
+            await taskViewModel.loadTasks()
         }
     }
+}
+
+#Preview {
+    ContentView()
+        .environmentObject(TaskViewModel())
 }
