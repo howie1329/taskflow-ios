@@ -55,7 +55,6 @@ struct DashboardView: View {
                     }
                 }
             }
-            .aiAnswerSheet(isPresented: $showingAiSheet)
             .eventViewSheet(isPresented: $showingEventSheet)
             .task {
                 await taskViewModel.loadTasks()

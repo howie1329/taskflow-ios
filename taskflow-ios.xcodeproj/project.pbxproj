@@ -7,14 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F356DF742E15C011009898C3 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F356DF732E15C00F009898C3 /* TaskViewModel.swift */; };
 		F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */ = {isa = PBXBuildFile; productRef = F393DA4B2DC9B55C00BB1CE2 /* Clerk */; };
 		F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */; };
 		F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA552DC9D4E700BB1CE2 /* Untitled.swift */; };
-		F39D67522E1619DD0004EEC0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67512E1619D70004EEC0 /* NetworkService.swift */; };
-		F39D67542E16405C0004EEC0 /* AINetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67532E1640550004EEC0 /* AINetworkService.swift */; };
-		F39D67562E166F1A0004EEC0 /* AiAnswerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */; };
-		F39D675A2E175F3D0004EEC0 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D67592E175F3D0004EEC0 /* EventView.swift */; };
 		F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */; };
 		F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */; };
 		F3E463302DC87FCD000D5AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */; };
@@ -22,13 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F356DF732E15C00F009898C3 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
 		F393DA552DC9D4E700BB1CE2 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
-		F39D67512E1619D70004EEC0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		F39D67532E1640550004EEC0 /* AINetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AINetworkService.swift; sourceTree = "<group>"; };
-		F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiAnswerSheet.swift; sourceTree = "<group>"; };
-		F39D67592E175F3D0004EEC0 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taskflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskflow_iosApp.swift; sourceTree = "<group>"; };
 		F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +28,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F3EDDE2A2E1D1CF900FE0F11 /* Features */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Features; sourceTree = "<group>"; };
+		F3EDDE3C2E1F925500FE0F11 /* Service */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Service; sourceTree = "<group>"; };
+		F3EDDE3D2E1F926600FE0F11 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,18 +63,15 @@
 		F3E4632A2DC87FCB000D5AC8 /* taskflow-ios */ = {
 			isa = PBXGroup;
 			children = (
+				F3EDDE3D2E1F926600FE0F11 /* ViewModel */,
+				F3EDDE3C2E1F925500FE0F11 /* Service */,
 				F3EDDE2A2E1D1CF900FE0F11 /* Features */,
-				F39D67532E1640550004EEC0 /* AINetworkService.swift */,
-				F39D67512E1619D70004EEC0 /* NetworkService.swift */,
-				F356DF732E15C00F009898C3 /* TaskViewModel.swift */,
 				F393DA552DC9D4E700BB1CE2 /* Untitled.swift */,
 				F3E4633B2DC88122000D5AC8 /* Models */,
 				F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */,
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
 				F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */,
 				F3E463312DC87FCD000D5AC8 /* Preview Content */,
-				F39D67552E166F1A0004EEC0 /* AiAnswerSheet.swift */,
-				F39D67592E175F3D0004EEC0 /* EventView.swift */,
 			);
 			path = "taskflow-ios";
 			sourceTree = "<group>";
@@ -120,6 +109,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				F3EDDE2A2E1D1CF900FE0F11 /* Features */,
+				F3EDDE3C2E1F925500FE0F11 /* Service */,
+				F3EDDE3D2E1F926600FE0F11 /* ViewModel */,
 			);
 			name = "taskflow-ios";
 			packageProductDependencies = (
@@ -183,13 +174,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
-				F39D67562E166F1A0004EEC0 /* AiAnswerSheet.swift in Sources */,
 				F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */,
-				F39D675A2E175F3D0004EEC0 /* EventView.swift in Sources */,
-				F356DF742E15C011009898C3 /* TaskViewModel.swift in Sources */,
 				F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */,
-				F39D67522E1619DD0004EEC0 /* NetworkService.swift in Sources */,
-				F39D67542E16405C0004EEC0 /* AINetworkService.swift in Sources */,
 				F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

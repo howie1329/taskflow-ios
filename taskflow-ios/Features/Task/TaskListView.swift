@@ -11,7 +11,6 @@ struct TaskListView: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
     @State var isPresented = false
     @State var selectedTask: TaskEvent?
-    @State var showingAiSheet: Bool = false
     @State var showingEventSheet: Bool = false
     
     var body: some View {
@@ -24,7 +23,6 @@ struct TaskListView: View {
                     taskContent
                 }
             }
-            .aiAnswerSheet(isPresented: $showingAiSheet)
             .eventViewSheet(isPresented: $showingEventSheet)
             .navigationTitle("Tasks")
             .navigationBarTitleDisplayMode(.large)
@@ -42,16 +40,6 @@ struct TaskListView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Event") {
                         showingEventSheet = true
-                    }
-                }
-                
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        showingAiSheet = true
-                    } label: {
-                        Image(systemName: "brain.head.profile")
-                            .font(.title2)
-                            .foregroundColor(.purple)
                     }
                 }
             }

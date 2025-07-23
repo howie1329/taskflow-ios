@@ -9,9 +9,12 @@ import SwiftUI
 
 struct AiAnswerSheet: View {
     @EnvironmentObject var taskViewModel: TaskViewModel
+    @State var mainChatThread: MainChatThread
     @State private var userPrompt: String = ""
     @State private var isPresented: Bool = false
-    @State private var chatMessages: [ChatMessage] = []
+    var messages:[NewChatMessage] {
+        return mainChatThread.messages
+    }
     @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
@@ -36,6 +39,7 @@ struct AiAnswerSheet: View {
         VStack(spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
+                    Text(mainChatThread.title)
                     Text("AI Assistant")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -53,8 +57,8 @@ struct AiAnswerSheet: View {
                         .foregroundColor(.red)
                         .font(.title3)
                 }
-                .opacity(chatMessages.count > 1 ? 1 : 0)
-                .animation(.easeInOut(duration: 0.3), value: chatMessages.count)
+                .opacity(messages.count > 1 ? 1 : 0)
+                .animation(.easeInOut(duration: 0.3), value: messages.count)
             }
             
             Divider()
@@ -69,9 +73,9 @@ struct AiAnswerSheet: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(chatMessages) { message in
-                        ChatBubbleView(message: message)
-                            .id(message.id)
+                    ForEach(mainChatThread.messages) { item in
+                        ChatBubbleView(message: item)
+                            .id(item.id)
                     }
                     
                     if taskViewModel.isLoading {
@@ -82,9 +86,9 @@ struct AiAnswerSheet: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             }
-            .onChange(of: chatMessages.count) { _, _ in
+            .onChange(of: mainChatThread.messages.count) { _, _ in
                 withAnimation(.easeOut(duration: 0.3)) {
-                    proxy.scrollTo(chatMessages.last?.id ?? "typing", anchor: .bottom)
+                    proxy.scrollTo(messages.last?.id ?? "typing", anchor: .bottom)
                 }
             }
             .onChange(of: taskViewModel.isLoading) { _, isLoading in
@@ -133,11 +137,11 @@ struct AiAnswerSheet: View {
     
     // MARK: - Methods
     private func setupWelcomeMessage() {
-        if chatMessages.isEmpty {
-            chatMessages.append(ChatMessage(
+        if mainChatThread.messages.isEmpty {
+            mainChatThread.append(NewChatMessage(
                 id: UUID().uuidString,
+                role: "assistant",
                 content: "Hi! I'm your AI assistant. I can help you with your tasks, answer questions, and provide insights. What would you like to know?",
-                isUser: false,
                 timestamp: Date()
             ))
         }
@@ -146,14 +150,15 @@ struct AiAnswerSheet: View {
     private func sendMessage() {
         guard canSendMessage else { return }
         
-        let userMessage = ChatMessage(
+        let userMessage = NewChatMessage(
             id: UUID().uuidString,
+            role: "user",
             content: userPrompt.trimmingCharacters(in: .whitespacesAndNewlines),
-            isUser: true,
             timestamp: Date()
         )
         
-        chatMessages.append(userMessage)
+        mainChatThread.append(userMessage)
+        print(mainChatThread.messages)
         let currentPrompt = userPrompt
         userPrompt = ""
         isTextFieldFocused = false
@@ -163,21 +168,21 @@ struct AiAnswerSheet: View {
         }
     }
     
-    private func askQuestion(prompt: String) {
+    private func askQuestion(prompt: String) async {
         Task {
-            await taskViewModel.askAiTaskQuestion(userPromot: prompt)
+            await taskViewModel.askAiTaskQuestion(userPromot: prompt, chatHistory: messages)
             
             // Add AI response to chat
             if !taskViewModel.aiChat.isEmpty {
-                let aiMessage = ChatMessage(
+                let aiMessage = NewChatMessage(
                     id: UUID().uuidString,
+                    role: "assistant",
                     content: taskViewModel.aiChat,
-                    isUser: false,
                     timestamp: Date()
                 )
                 
                 await MainActor.run {
-                    chatMessages.append(aiMessage)
+                    mainChatThread.append(aiMessage)
                 }
             }
         }
@@ -185,27 +190,35 @@ struct AiAnswerSheet: View {
     
     private func clearChat() {
         withAnimation(.easeInOut(duration: 0.3)) {
-            chatMessages.removeAll()
+            mainChatThread.messages.removeAll()
             setupWelcomeMessage()
         }
     }
 }
 
 // MARK: - Chat Message Model
-struct ChatMessage: Identifiable {
+struct ChatMessage: Identifiable, Codable {
     let id: String
     let content: String
     let isUser: Bool
     let timestamp: Date
 }
 
+// MARK: - New Chat Message Model
+struct NewChatMessage: Identifiable, Codable {
+    let id: String
+    let role: String
+    let content: String
+    let timestamp: Date
+}
+
 // MARK: - Chat Bubble View
 struct ChatBubbleView: View {
-    let message: ChatMessage
+    let message: NewChatMessage
     
     var body: some View {
         HStack {
-            if message.isUser {
+            if message.role == "user" {
                 Spacer(minLength: 60)
                 
                 VStack(alignment: .trailing, spacing: 4) {
@@ -220,6 +233,7 @@ struct ChatBubbleView: View {
                     Text(formatTime(message.timestamp))
                         .font(.caption2)
                         .foregroundColor(.secondary)
+                    
                 }
             } else {
                 VStack(alignment: .leading, spacing: 4) {
@@ -237,18 +251,16 @@ struct ChatBubbleView: View {
                             .cornerRadius(18)
                             .cornerRadius(4, corners: [.topLeft, .topRight, .bottomRight])
                     }
-                    
                     Text(formatTime(message.timestamp))
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                        .padding(.leading, 32)
                 }
                 
                 Spacer(minLength: 60)
             }
         }
         .transition(.asymmetric(
-            insertion: .move(edge: message.isUser ? .trailing : .leading).combined(with: .opacity),
+            insertion: .move(edge: message.role == "user" ? .trailing : .leading).combined(with: .opacity),
             removal: .opacity
         ))
     }
@@ -326,10 +338,10 @@ struct RoundedCorner: Shape {
 
 // MARK: - Sheet Extension
 extension View {
-    func aiAnswerSheet(isPresented: Binding<Bool>) -> some View {
+    func aiAnswerSheet(isPresented: Binding<Bool>, mainChatThread: MainChatThread) -> some View {
         self.sheet(isPresented: isPresented) {
             NavigationView {
-                AiAnswerSheet()
+                AiAnswerSheet(mainChatThread: mainChatThread)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -341,9 +353,4 @@ extension View {
             }
         }
     }
-}
-
-#Preview {
-    AiAnswerSheet()
-        .environmentObject(TaskViewModel())
 }
