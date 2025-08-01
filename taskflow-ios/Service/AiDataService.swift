@@ -20,7 +20,24 @@ class AiDataService {
         chatThreads.append(thread)
     }
     
+    func removeThread(_ thread: MainChatThread) {
+        chatThreads.removeAll { $0.id == thread.id }
+        
+        // Clear currentMainThread if it's the one being deleted
+        if currentMainThread?.id == thread.id {
+            currentMainThread = nil
+        }
+    }
     
+    func removeThread(at indexSet: IndexSet) {
+        for index in indexSet {
+            let threadToRemove = chatThreads[index]
+            if currentMainThread?.id == threadToRemove.id {
+                currentMainThread = nil
+            }
+        }
+        chatThreads.remove(atOffsets: indexSet)
+    }
 }
 
 @MainActor

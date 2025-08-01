@@ -13,8 +13,8 @@ struct AIChatsView: View {
     
     var body: some View {
         NavigationStack {
-            if aiDataService.chatThreads.isEmpty {
-                VStack(spacing: 24) {
+            VStack {
+                if aiDataService.chatThreads.isEmpty {
                     Spacer()
                     
                     // AI-themed empty state
@@ -39,7 +39,7 @@ struct AIChatsView: View {
                     
                     // Call-to-action button
                     Button(action: {
-                        aiDataService.appendThread(MainChatThread(title: "Number 1"))
+                        aiDataService.appendThread(MainChatThread(title: UUID().uuidString))
                         aiDataService.currentMainThread = aiDataService.chatThreads.last
                         showingAiSheet = true
                     }) {
@@ -65,19 +65,42 @@ struct AIChatsView: View {
                     }
                     
                     Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(.systemGroupedBackground))
-            } else {
-                List(aiDataService.chatThreads) { item in
-                    NavigationLink(item.title) {
-                        AiAnswerSheet(mainChatThread: item)
+                } else {
+                    List(aiDataService.chatThreads) { item in
+                        NavigationLink(item.title) {
+                            AiAnswerSheet(mainChatThread: item)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                aiDataService.removeThread(item)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                     }
                 }
             }
+            .toolbar{
+                if !aiDataService.chatThreads.isEmpty {
+                    Button {
+                        aiDataService.appendThread(MainChatThread(title: UUID().uuidString))
+                        aiDataService.currentMainThread = aiDataService.chatThreads.last
+                        showingAiSheet = true
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "brain.head.profile")
+                                .font(.caption)
+                            Text("New AI Chat")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("AI Chats")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .navigationTitle("AI Chats")
-        .navigationBarTitleDisplayMode(.large)
+        
         .aiAnswerSheet(isPresented: $showingAiSheet, mainChatThread: aiDataService.currentMainThread ?? MainChatThread(title: "Error"))
     }
 }

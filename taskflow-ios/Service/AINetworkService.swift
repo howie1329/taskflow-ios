@@ -63,13 +63,36 @@ struct TokenDetail: Codable {
 struct VercelAIResponse: Codable {
     let text: String
     let toolCalls: [VercelSingleTool]
+    //let toolResults: [VercelSingleToolResults]?
 }
 
 // MARK: - Vercel AI Single Tool
-struct VercelSingleTool: Codable{
+struct VercelSingleTool: Codable {
     let type: String
     let toolCallId: String
     let toolName:String
+}
+
+// MARK: - Vercel AI Single Tool Results
+struct VercelSingleToolResults: Codable {
+    let type: String
+    let toolCallId: String
+    let toolName: String
+    let result: VercelSingleToolResult
+}
+
+// MARK: - Vercel AI Single Tool Result
+struct VercelSingleToolResult: Codable {
+    let text: String
+    let type: String
+    let prompt: String
+    let choices: [VercelSingleToolResultChoice]?
+}
+
+// MARK: - Vercel AI Single Tool Result Choice
+struct VercelSingleToolResultChoice: Codable {
+    let id: String
+    let title: String
 }
 
 // MARK: - App/User Prompt
