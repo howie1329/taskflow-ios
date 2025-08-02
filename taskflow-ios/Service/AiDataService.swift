@@ -13,6 +13,8 @@ class AiDataService {
     
     var chatThreads: [MainChatThread] = []
     var currentMainThread: MainChatThread? = nil
+    var isAiLoading: Bool = false // Add dedicated AI loading state
+    var currentAiError: String? = nil // Add error handling for AI responses
     
     private init() { }
     
@@ -37,6 +39,21 @@ class AiDataService {
             }
         }
         chatThreads.remove(atOffsets: indexSet)
+    }
+    
+    // MARK: - AI Loading State Management
+    @MainActor
+    func setAiLoading(_ loading: Bool) {
+        isAiLoading = loading
+        if loading {
+            currentAiError = nil // Clear any previous errors when starting new request
+        }
+    }
+    
+    @MainActor
+    func setAiError(_ error: String?) {
+        currentAiError = error
+        isAiLoading = false
     }
 }
 

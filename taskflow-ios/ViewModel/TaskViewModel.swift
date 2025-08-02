@@ -13,7 +13,7 @@ class TaskViewModel:ObservableObject {
     
     var taskArr: [TaskEvent] = []
     var aiChat: String = ""
-    var isLoading: Bool = false
+    var isLoading: Bool = false // Keep this for general task loading
     private let userID = "user_2usb0Md2SjCvMehu1XHJBN2y03c"
     
     init(){
@@ -79,11 +79,14 @@ class TaskViewModel:ObservableObject {
     
     @MainActor
     func askAiTaskQuestion(userPromot: String, chatHistory: [NewChatMessage]? = nil) async {
+        let aiDataService = AiDataService.shared
+        
         do{
-            self.isLoading = true
+            await aiDataService.setAiLoading(true)
             self.aiChat = try await AINetworkService.shared.AiTaskResponseAPICall(taskContext: self.taskArr, userPrompt: userPromot, chatHistory: chatHistory, userId: self.userID)
-            self.isLoading = false
+            await aiDataService.setAiLoading(false)
         } catch {
+            await aiDataService.setAiError("Failed to get AI response. Please try again.")
             print("Error fetching AI response: \(error)")
         }
     }

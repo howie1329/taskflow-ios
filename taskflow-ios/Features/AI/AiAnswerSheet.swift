@@ -12,6 +12,8 @@ struct AiAnswerSheet: View {
     @State var mainChatThread: MainChatThread
     @State private var userPrompt: String = ""
     @State private var isPresented: Bool = false
+    @State private var aiDataService = AiDataService.shared
+    
     var messages:[NewChatMessage] {
         return mainChatThread.messages
     }
@@ -78,9 +80,20 @@ struct AiAnswerSheet: View {
                             .id(item.id)
                     }
                     
-                    if taskViewModel.isLoading {
-                        TypingIndicator()
+                    // Show AI loading indicator
+                    if aiDataService.isAiLoading {
+                        EnhancedTypingIndicator()
                             .id("typing")
+                    }
+                    
+                    // Show error message if there's an AI error
+                    if let error = aiDataService.currentAiError {
+                        ErrorMessageView(error: error) {
+                            Task {
+                                await aiDataService.setAiError(nil)
+                            }
+                        }
+                        .id("error")
                     }
                 }
                 .padding(.horizontal, 20)
@@ -91,10 +104,17 @@ struct AiAnswerSheet: View {
                     proxy.scrollTo(messages.last?.id ?? "typing", anchor: .bottom)
                 }
             }
-            .onChange(of: taskViewModel.isLoading) { _, isLoading in
+            .onChange(of: aiDataService.isAiLoading) { _, isLoading in
                 if isLoading {
                     withAnimation(.easeOut(duration: 0.3)) {
                         proxy.scrollTo("typing", anchor: .bottom)
+                    }
+                }
+            }
+            .onChange(of: aiDataService.currentAiError) { _, error in
+                if error != nil {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        proxy.scrollTo("error", anchor: .bottom)
                     }
                 }
             }
@@ -116,13 +136,22 @@ struct AiAnswerSheet: View {
                     .lineLimit(1...4)
                     .focused($isTextFieldFocused)
                 
-                Button(action: sendMessage) {
-                    Image(systemName: taskViewModel.isLoading ? "stop.fill" : "arrow.up.circle.fill")
+                Button(action: {
+                    if aiDataService.isAiLoading {
+                        Task {
+                            await cancelAiRequest()
+                        }
+                    } else {
+                        sendMessage()
+                    }
+                }) {
+                    Image(systemName: aiDataService.isAiLoading ? "stop.fill" : "arrow.up.circle.fill")
                         .font(.title2)
-                        .foregroundColor(canSendMessage ? .blue : .gray)
+                        .foregroundColor(canSendMessage || aiDataService.isAiLoading ? .blue : .gray)
                 }
-                .disabled(!canSendMessage)
+                .disabled(!canSendMessage && !aiDataService.isAiLoading)
                 .animation(.easeInOut(duration: 0.2), value: canSendMessage)
+                .animation(.easeInOut(duration: 0.2), value: aiDataService.isAiLoading)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
@@ -132,7 +161,7 @@ struct AiAnswerSheet: View {
     
     // MARK: - Computed Properties
     private var canSendMessage: Bool {
-        !userPrompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !taskViewModel.isLoading
+        !userPrompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !aiDataService.isAiLoading
     }
     
     // MARK: - Methods
@@ -188,10 +217,107 @@ struct AiAnswerSheet: View {
         }
     }
     
+    private func cancelAiRequest() async {
+        await aiDataService.setAiLoading(false)
+        await aiDataService.setAiError("Request cancelled")
+    }
+    
     private func clearChat() {
         withAnimation(.easeInOut(duration: 0.3)) {
             mainChatThread.messages.removeAll()
             setupWelcomeMessage()
+        }
+    }
+}
+
+// MARK: - Enhanced Typing Indicator
+struct EnhancedTypingIndicator: View {
+    @State private var animationOffset: CGFloat = 0
+    @State private var pulseAnimation: Bool = false
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "brain.head.profile")
+                        .font(.title3)
+                        .foregroundColor(.blue)
+                        .frame(width: 24, height: 24)
+                        .scaleEffect(pulseAnimation ? 1.1 : 1.0)
+                        .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 4) {
+                            ForEach(0..<3) { index in
+                                Circle()
+                                    .fill(Color.blue.opacity(0.6))
+                                    .frame(width: 8, height: 8)
+                                    .scaleEffect(animationOffset == CGFloat(index) ? 1.3 : 0.8)
+                                    .animation(
+                                        .easeInOut(duration: 0.6)
+                                        .repeatForever()
+                                        .delay(Double(index) * 0.2),
+                                        value: animationOffset
+                                    )
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(18)
+                        .cornerRadius(4, corners: [.topLeft, .topRight, .bottomRight])
+                        
+                        Text("AI is thinking...")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .opacity(pulseAnimation ? 0.5 : 1.0)
+                    }
+                }
+            }
+            
+            Spacer(minLength: 60)
+        }
+        .onAppear {
+            animationOffset = 2
+            pulseAnimation = true
+        }
+    }
+}
+
+// MARK: - Error Message View
+struct ErrorMessageView: View {
+    let error: String
+    let onDismiss: () -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.title3)
+                        .foregroundColor(.red)
+                        .frame(width: 24, height: 24)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(error)
+                            .font(.body)
+                            .foregroundColor(.primary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(Color.red.opacity(0.1))
+                            .cornerRadius(18)
+                            .cornerRadius(4, corners: [.topLeft, .topRight, .bottomRight])
+                        
+                        Button("Dismiss") {
+                            onDismiss()
+                        }
+                        .font(.caption)
+                        .foregroundColor(.red)
+                    }
+                }
+            }
+            
+            Spacer(minLength: 60)
         }
     }
 }
@@ -272,7 +398,7 @@ struct ChatBubbleView: View {
     }
 }
 
-// MARK: - Typing Indicator
+// MARK: - Original Typing Indicator (kept for compatibility)
 struct TypingIndicator: View {
     @State private var animationOffset: CGFloat = 0
     
