@@ -110,12 +110,109 @@ struct AppUserPrompt: Codable {
     
 }
 
+// MARK: - NEW STREAMING AI STRUCTS
+
+struct TextDeltaChunk: Codable {
+    let type: String = "text-delta"
+    let text: String
+}
+
+struct ToolCallChunk: Codable {
+    let type: String = "tool-call"
+    let toolCallId: String
+    let toolName: String
+}
+
+enum AIChunk: Decodable {
+    case textDeltaChunk(TextDeltaChunk)
+    case toolCallChunk(ToolCallChunk)
+    
+    private enum CodingKeys: String, CodingKey {
+        case type
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(String.self, forKey: .type)
+        
+        switch type {
+            case "text-delta":
+            let value = try TextDeltaChunk(from: decoder)
+            self = .textDeltaChunk(value)
+        case "tool-call":
+            let value = try ToolCallChunk(from: decoder)
+            self = .toolCallChunk(value)
+        default:
+            fatalError("Unsupported chunk type: \(type)")
+        }
+    }
+}
+
 
 class AINetworkService {
     static let shared = AINetworkService()
     
     init(){
     }
+    
+    
+    // MARK: NEW STREAMING AI API RESPONSE
+    
+    func streamAiResponse(_ sentResponse: AppUserPrompt) async throws -> AsyncThrowingStream<AIChunk, Error> {
+    
+        AsyncThrowingStream{ continuation in
+            Task{
+                do{
+                    //let baseUrl = "https://taskflow-backend-production-8812.up.railway.app"
+                    let baseUrl = "http://localhost:3001"
+                    let urlString = "\(baseUrl)/api/vercel-ai/taskflow-ai"
+                    
+                    guard let url = URL(string: urlString) else {
+                       throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+                    }
+                    
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    let encoder = JSONEncoder()
+                    encoder.dateEncodingStrategy = .iso8601
+                    
+                    do{
+                        request.httpBody = try encoder.encode(sentResponse)
+                    } catch {
+                        throw NSError(domain: "Error encoding JSON", code: 0)
+                    }
+                    
+                    let (bytes, _) = try await URLSession.shared.bytes(for: request)
+                    for try await line in bytes.lines{
+                        guard line.hasPrefix("data:") else { continue }
+                        let payload = String(line.dropFirst(6))
+                        if payload == "[DONE]"{
+                            continuation.finish()
+                            break
+                        }
+                        if let data = payload.data(using: .utf8){
+                            do{
+                                let chunk = try JSONDecoder().decode(AIChunk.self, from: data)
+                                continuation.yield(chunk)
+                            } catch {
+                                //
+                            }
+                        }
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
+                }
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    // MARK: OLD AI API RESPONSE
     
     func extractTextResponse(from response: VercelAIResponse) -> String? {
         return response.text
