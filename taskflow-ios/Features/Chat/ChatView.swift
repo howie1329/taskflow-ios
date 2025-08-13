@@ -8,8 +8,40 @@
 import SwiftUI
 
 struct ChatView: View {
+    @State var viewModel = ChatViewModel()
+    @State var userMessage:String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            VStack{
+                Divider()
+                ScrollView{
+                    ForEach(viewModel.messages, id: \.id){message in
+                        Text(message.content)
+                    }
+                }
+                Divider()
+                HStack{
+                    TextField("Message", text: $userMessage)
+                    Button {
+                        viewModel.sendMessage(userMessage)
+                        userMessage = ""
+                    } label: {
+                        Text("+")
+                    }
+
+                }
+            }
+            .safeAreaPadding()
+            .navigationTitle("AI Chat ")
+            .toolbar{
+                Button {
+                    viewModel.clearChat()
+                } label: {
+                    Text("Clear Chat")
+                }
+
+            }
+        }
     }
 }
 

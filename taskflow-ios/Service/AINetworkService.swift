@@ -123,9 +123,30 @@ struct ToolCallChunk: Codable {
     let toolName: String
 }
 
+struct StartChunk: Codable {
+    let type: String = "start"
+}
+
+struct StartStepChunk: Codable {
+    let type: String = "start-step"
+}
+
+struct TextStartChunk: Codable {
+    let type:String = "text-start"
+}
+
+struct TextEndChunk: Codable {
+    let type:String = "text-end"
+}
+
 enum AIChunk: Decodable {
     case textDeltaChunk(TextDeltaChunk)
     case toolCallChunk(ToolCallChunk)
+    case startChunk(StartChunk)
+    case startStepChunk(StartStepChunk)
+    case textStartChunk(TextStartChunk)
+    case textEndChunk(TextEndChunk)
+    case unknown(String)
     
     private enum CodingKeys: String, CodingKey {
         case type
@@ -142,8 +163,22 @@ enum AIChunk: Decodable {
         case "tool-call":
             let value = try ToolCallChunk(from: decoder)
             self = .toolCallChunk(value)
+        case "start":
+            let value = try StartChunk(from: decoder)
+            self = .startChunk(value)
+        case "start-step":
+            let value = try StartStepChunk(from: decoder)
+            self = .startStepChunk(value)
+        case "text-start":
+            let value = try TextStartChunk(from: decoder)
+            self = .textStartChunk(value)
+        case "text-end":
+            let value = try TextEndChunk(from: decoder)
+            self = .textEndChunk(value)
         default:
-            fatalError("Unsupported chunk type: \(type)")
+            print("This is a unknown Chunk Type: \(type)")
+            self = .unknown(type)
+            //fatalError("Unsupported chunk type: \(type)")
         }
     }
 }

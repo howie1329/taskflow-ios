@@ -26,7 +26,7 @@ struct ContentView: View {
                     Text("Tasks")
                 }
             // AI Main Chat Tab
-            AIChatsView()
+            ChatView()
                 .tabItem{
                     Image(systemName: "brain.head.profile")
                     Text("AI")
