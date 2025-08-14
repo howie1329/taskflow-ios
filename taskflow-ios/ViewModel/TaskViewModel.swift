@@ -56,26 +56,6 @@ class TaskViewModel:ObservableObject {
             print("Error fetching tasks: \(error)")
         }
     }
-    /*
-    @MainActor
-    private func loadAiResponse() async {
-        do{
-            let response = try await AINetworkService.shared.fetchAiResponse(prompt: "What is 2 + 2")
-            self.aiChat = response
-        } catch {
-            print("Error fetching AI response: \(error)")
-        }
-    }
-    
-    @MainActor
-    func loadAiQuestionResponse(userPrompt: String) async {
-        do{
-            let response = try await AINetworkService.shared.fetchAiResponse(prompt: userPrompt)
-            self.aiChat = response
-        } catch {
-            print("Error fetching AI response: \(error)")
-        }
-    } */
     
     @MainActor
     func askAiTaskQuestion(userPromot: String, chatHistory: [NewChatMessage]? = nil) async {

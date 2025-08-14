@@ -13,35 +13,107 @@ struct ChatView: View {
     var body: some View {
         NavigationView{
             VStack{
+                HStack{
+                    Spacer()
+                    Text("Flow Chat")
+                        .font(.headline)
+                    Spacer()
+                    Button {
+                        viewModel.clearChat()
+                    } label: {
+                        Image(systemName: "clear.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.black)
+                        .frame(width: 40, height: 40)
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    }
+                }
                 Divider()
                 ScrollView{
-                    ForEach(viewModel.messages, id: \.id){message in
-                        Text(message.content)
+                    LazyVStack(alignment:.leading, spacing: 12){
+                        ForEach(viewModel.messages, id: \.id){message in
+                            ChatBubble(message: message)
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                                                }
                     }
                 }
                 Divider()
-                HStack{
+                HStack(spacing: 8){
                     TextField("Message", text: $userMessage)
-                    Button {
-                        viewModel.sendMessage(userMessage)
-                        userMessage = ""
-                    } label: {
-                        Text("+")
+                        .textFieldStyle(.plain)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .fill(Color.white)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .stroke(Color.black.opacity(0.12), lineWidth: 1)
+                        )
+                    if !userMessage.isEmpty{
+                        Button {
+                            let trimmed = userMessage.trimmingCharacters(in: .whitespacesAndNewlines)
+                            guard !trimmed.isEmpty else { return }
+                            viewModel.sendMessage(trimmed)
+                            userMessage = ""
+                        } label: {
+                            Image(systemName: "paperplane.fill")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 40, height: 40)
+                                .background(Color.black)
+                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        }
+                        .disabled(userMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        .opacity(userMessage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.5 : 1)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity).combined(with: .scale(scale: 0.8)),
+                            removal: .move(edge: .trailing).combined(with: .opacity).combined(with: .scale(scale: 0.8))
+                        ))
                     }
-
+                   
                 }
+                .animation(.smooth(duration: 0.3), value: userMessage.isEmpty)
             }
             .safeAreaPadding()
-            .navigationTitle("AI Chat ")
-            .toolbar{
-                Button {
-                    viewModel.clearChat()
-                } label: {
-                    Text("Clear Chat")
-                }
+        }.onAppear {
+            //viewModel.messages = ChatPrompt.dummyData
+        }
+    }
+}
 
+struct ChatBubble: View {
+    let message: ChatPrompt
+    var body: some View {
+        let isUser = message.role == .user
+        VStack(alignment: .leading, spacing: 4){
+            Text(isUser ? "You" : "Assistant")
+                .font(.caption2)
+                .foregroundStyle(Color.black.opacity(0.5))
+                .padding(isUser ? .trailing : .leading, 8)
+                .frame(maxWidth: .infinity, alignment: isUser ? .trailing : .leading)
+            HStack(alignment: .bottom){
+                if isUser { Spacer(minLength: 40) }
+                Text(message.content)
+                    .font(.body)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 10)
+                    .background(isUser ? Color.black : Color.white)
+                    .foregroundStyle(isUser ? Color.white : Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .stroke(Color.black.opacity(isUser ? 0 : 0.12), lineWidth: isUser ? 0 : 1)
+                    )
+                    .shadow(color: Color.black.opacity(isUser ? 0.15 : 0.06), radius: isUser ? 10 : 6, x: 0, y: isUser ? 6 : 2)
+                    .frame(maxWidth: 300, alignment: isUser ? .trailing : .leading)
+                if !isUser { Spacer(minLength: 40) }
             }
         }
+        .padding(.horizontal)
+        .padding(.vertical, 2)
     }
 }
 

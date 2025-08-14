@@ -8,6 +8,31 @@
 
 import Foundation
 
+struct ChatPrompt: Identifiable, Codable{
+    var id = UUID()
+    let role: MessageRole
+    var content:String
+
+    enum MessageRole: String, Codable{
+        case user = "user"
+        case assistant = "assistant"
+    }
+}
+
+extension ChatPrompt {
+	static let dummyData: [ChatPrompt] = [
+		.init(role: .assistant, content: "👋 Hey! I’m your Taskflow AI. How can I help today?"),
+		.init(role: .user, content: "What’s on my schedule today?"),
+		.init(role: .assistant, content: "You have Daily Standup at 9:00 AM, Code Review at 11:00 AM, and a Project Sync at 2:00 PM."),
+		.init(role: .user, content: "Summarize my open tasks and priorities."),
+		.init(role: .assistant, content: "You have 5 open tasks. Top priorities: 1) Implement auth middleware, 2) Fix iOS chat streaming bug, 3) Write unit tests for TaskService."),
+		.init(role: .user, content: "Create a subtask for auth middleware: 'Add JWT verification'."),
+		.init(role: .assistant, content: "Subtask added: Add JWT verification to the API gateway."),
+		.init(role: .user, content: "Thanks!"),
+		.init(role: .assistant, content: "Anytime. Want me to draft a checklist for today?")
+	]
+}
+
 @Observable
 class ChatViewModel {
     let aiService = AIService.shared
@@ -90,14 +115,5 @@ class ChatViewModel {
 
 }
 
-struct ChatPrompt: Identifiable, Codable{
-    var id = UUID()
-    let role: MessageRole
-    var content:String
 
-    enum MessageRole: String, Codable{
-        case user = "user"
-        case assistant = "assistant"
-    }
-}
 

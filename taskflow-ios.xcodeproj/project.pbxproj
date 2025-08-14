@@ -10,7 +10,6 @@
 		F3403A382E4B1C9F004AE820 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = F3403A372E4B1C9F004AE820 /* SocketIO */; };
 		F393DA4C2DC9B55C00BB1CE2 /* Clerk in Frameworks */ = {isa = PBXBuildFile; productRef = F393DA4B2DC9B55C00BB1CE2 /* Clerk */; };
 		F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */; };
-		F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F393DA552DC9D4E700BB1CE2 /* Untitled.swift */; };
 		F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */; };
 		F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */; };
 		F3E463302DC87FCD000D5AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E4632F2DC87FCD000D5AC8 /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		F393DA532DC9D3DD00BB1CE2 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
-		F393DA552DC9D4E700BB1CE2 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		F3E463282DC87FCB000D5AC8 /* taskflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "taskflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskflow_iosApp.swift; sourceTree = "<group>"; };
 		F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,7 +66,6 @@
 				F3EDDE3D2E1F926600FE0F11 /* ViewModel */,
 				F3EDDE3C2E1F925500FE0F11 /* Service */,
 				F3EDDE2A2E1D1CF900FE0F11 /* Features */,
-				F393DA552DC9D4E700BB1CE2 /* Untitled.swift */,
 				F3E4633B2DC88122000D5AC8 /* Models */,
 				F3E4632B2DC87FCB000D5AC8 /* taskflow_iosApp.swift */,
 				F3E4632D2DC87FCB000D5AC8 /* ContentView.swift */,
@@ -180,7 +177,6 @@
 				F3E4632E2DC87FCB000D5AC8 /* ContentView.swift in Sources */,
 				F393DA542DC9D3DD00BB1CE2 /* Tasks.swift in Sources */,
 				F3E4632C2DC87FCB000D5AC8 /* taskflow_iosApp.swift in Sources */,
-				F393DA562DC9D4EA00BB1CE2 /* Untitled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
