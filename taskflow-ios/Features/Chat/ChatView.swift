@@ -33,9 +33,19 @@ struct ChatView: View {
                 ScrollView{
                     LazyVStack(alignment:.leading, spacing: 12){
                         ForEach(viewModel.messages, id: \.id){message in
-                            ChatBubble(message: message)
-                                .transition(.move(edge: .bottom).combined(with: .opacity))
-                                                }
+                            Group{
+                                switch message.type {
+                                case .text:
+                                    ChatBubble(message: message)
+                                case .toolCall:
+                                    ChatBubble(message: message)
+                                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                                case .start:
+                                    StartBubble(message: message)
+                                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                                }
+                            }
+                        }
                     }
                 }
                 Divider()
@@ -81,6 +91,9 @@ struct ChatView: View {
         }.onAppear {
             //viewModel.messages = ChatPrompt.dummyData
         }
+        .onDisappear {
+            viewModel.messages.removeAll()
+        }
     }
 }
 
@@ -114,6 +127,39 @@ struct ChatBubble: View {
         }
         .padding(.horizontal)
         .padding(.vertical, 2)
+    }
+}
+
+struct StartBubble: View {
+    @State private var animationOffset: CGFloat = 0
+    let message: ChatPrompt
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<3) { index in
+                Circle()
+                    .fill(Color.black)
+                    .frame(width: 8, height: 8)
+                    .scaleEffect(animationOffset == CGFloat(index) ? 1.2 : 0.8)
+                    .animation(
+                        .easeInOut(duration: 0.6)
+                        .repeatForever()
+                        .delay(Double(index) * 0.2),
+                        value: animationOffset
+                    )
+            }
+        }
+        .onAppear{
+            animationOffset = 2
+        }
+    }
+}
+
+struct ToolCallBubble: View {
+    let message: ChatPrompt
+    var body: some View {
+        HStack{
+            Text(message.content.capitalized)
+        }
     }
 }
 

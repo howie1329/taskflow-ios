@@ -31,6 +31,11 @@ struct ContentView: View {
                     Image(systemName: "brain.head.profile")
                     Text("AI")
                 }
+            AIChatsView()
+                .tabItem{
+                    Image(systemName: "brain.head.profile")
+                    Text("DEV")
+                }
         }
         .task {
             await taskViewModel.loadTasks()
